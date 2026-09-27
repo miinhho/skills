@@ -1,6 +1,6 @@
 ---
 name: module-design
-description: Design module ownership and interfaces for a scoped coding task before its implementation graph is planned.
+description: Design module ownership and interfaces for a scoped coding task before implementation planning.
 ---
 
 # Module design
@@ -19,4 +19,4 @@ Record:
 
 Prefer a smaller interface that contains the behavior. Do not create a module solely to satisfy a diagram or split a coherent state owner across tasks. Distinguish an observed code fact from a proposed design choice.
 
-The artifact is ready for intent review when a reviewer can trace each proposed module and test case back to the user's goal, and when every affected state and shared interface has an owner. Do not write implementation tasks yet; task decomposition follows the design review.
+The artifact is ready for intent review when a reviewer can trace each proposed module and test case back to the user's goal, and when every affected state and shared interface has an owner. Leave implementation tasks to a later planning step.
