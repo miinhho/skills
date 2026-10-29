@@ -9,8 +9,8 @@ Each skill's `SKILL.md` defines when to use it, the procedure to follow, and wha
 | Skill | When to use it | Main output |
 | --- | --- | --- |
 | [compose-agents-md](skills/compose-agents-md/SKILL.md) | Setting up a project or updating its persistent working agreements | An `AGENTS.md` section tailored to the repository while preserving existing guidance |
-| [module-design](skills/module-design/SKILL.md) | Designing module boundaries before implementing requested behavior | A design covering responsibilities, public interfaces, state ownership, dependencies, and acceptance cases |
-| [design-intent-review](skills/design-intent-review/SKILL.md) | Independently checking whether a proposed design serves the user's goal | Findings grounded in evidence, classified as `blocking`, `advisory`, or `none` |
+| [module-design](skills/module-design/SKILL.md) | Designing a scoped coding task before implementation planning | A design deriving responsibilities, interfaces, and acceptance evidence from task context and available system evidence |
+| [design-intent-review](skills/design-intent-review/SKILL.md) | Independently checking whether a proposed change serves the user's goal | Evidence-backed findings on intent, change rationale, scope, and acceptance cases, classified as `blocking`, `advisory`, or `none` |
 | [evidence-driven-poc](skills/evidence-driven-poc/SKILL.md) | Gathering executable evidence for an important design assumption or behavior claim | A minimal experiment, observations, a verdict, its scope, and remaining uncertainty |
 | [e2e-verify](skills/e2e-verify/SKILL.md) | Reviewing whether E2E tests prove their claims, or verifying a specific workflow with existing tools | Confirmed findings, evidence for each claim, and remaining uncertainty |
 
@@ -30,6 +30,10 @@ Point your agent to the relevant `SKILL.md` and provide the task goal and target
 
 > Follow `skills/design-intent-review/SKILL.md` to review this design. Use a separate reviewer context from the designer, check the original request and repository evidence, and identify any mismatch with the goal.
 
+**Design and review a change to an existing system**
+
+> Follow `skills/module-design/SKILL.md` for this change. Understand the task background and trace the relevant code, its responsibilities, and caller expectations. Derive where the change belongs, what must remain true, and how to verify the outcome. Then use `skills/design-intent-review/SKILL.md` in a separate reviewer context to check that understanding and the resulting decisions.
+
 **Test an assumption**
 
 > Follow `skills/evidence-driven-poc/SKILL.md` to test the assumption that no further state changes occur after task cancellation. Run a minimal experiment at the actual state transition boundary and distinguish what the results establish from what remains unverified.
@@ -44,7 +48,7 @@ To request execution, name the workflow and target environment:
 
 ## Using the skills together
 
-Use `compose-agents-md` to define persistent project working agreements. For an individual feature, use `module-design` to produce a design, then use `design-intent-review` to check it against the user's intent before implementation planning. Revise the design if the review identifies a blocking finding.
+Use `compose-agents-md` to define persistent project working agreements. For a scoped coding task, use `module-design` to understand the context and available system evidence, then derive responsibilities, interfaces, and acceptance evidence. Use `design-intent-review` to independently check those decisions before implementation planning. Revise the design if the review identifies a blocking finding. Scale the analysis and artifact to the decisions involved, and schedule assumption checks according to their impact and the cost of changing the decision.
 
 When design or review exposes an assumption that needs executable evidence, use `evidence-driven-poc`. Feed the results back into the design and keep conclusions within the conditions and scope actually tested.
 
