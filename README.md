@@ -1,6 +1,6 @@
 # Skills
 
-Reusable skills for working with coding agents. Use them to define project working agreements, design module responsibilities and state ownership before implementation, review design intent, and test uncertain assumptions.
+Reusable skills for working with coding agents. Use them to set project rules, design modules, review designs, test assumptions, and assess end-to-end (E2E) evidence across frontend and backend systems.
 
 Each skill's `SKILL.md` defines when to use it, the procedure to follow, and what to include in the result. Choose the skills that fit the task.
 
@@ -12,6 +12,7 @@ Each skill's `SKILL.md` defines when to use it, the procedure to follow, and wha
 | [module-design](skills/module-design/SKILL.md) | Designing module boundaries before implementing requested behavior | A design covering responsibilities, public interfaces, state ownership, dependencies, and acceptance cases |
 | [design-intent-review](skills/design-intent-review/SKILL.md) | Independently checking whether a proposed design serves the user's goal | Findings grounded in evidence, classified as `blocking`, `advisory`, or `none` |
 | [evidence-driven-poc](skills/evidence-driven-poc/SKILL.md) | Gathering executable evidence for an important design assumption or behavior claim | A minimal experiment, observations, a verdict, its scope, and remaining uncertainty |
+| [e2e-verify](skills/e2e-verify/SKILL.md) | Reviewing whether E2E tests prove their claims, or verifying a specific workflow with existing tools | Confirmed findings, evidence for each claim, and remaining uncertainty |
 
 ## Usage examples
 
@@ -33,11 +34,21 @@ Point your agent to the relevant `SKILL.md` and provide the task goal and target
 
 > Follow `skills/evidence-driven-poc/SKILL.md` to test the assumption that no further state changes occur after task cancellation. Run a minimal experiment at the actual state transition boundary and distinguish what the results establish from what remains unverified.
 
+**Review E2E evidence**
+
+> Follow `skills/e2e-verify/SKILL.md` to review this workflow's tests. Look for passes without verification, unstable execution, the wrong target, and insufficient result evidence. Report confirmed findings and distinguish source analysis from executed results.
+
+To request execution, name the workflow and target environment:
+
+> Follow `skills/e2e-verify/SKILL.md` to verify this workflow in the local test environment. Use existing tools to establish whether an accepted job completes and produces the required output. Report the evidence and anything left unverified.
+
 ## Using the skills together
 
 Use `compose-agents-md` to define persistent project working agreements. For an individual feature, use `module-design` to produce a design, then use `design-intent-review` to check it against the user's intent before implementation planning. Revise the design if the review identifies a blocking finding.
 
 When design or review exposes an assumption that needs executable evidence, use `evidence-driven-poc`. Feed the results back into the design and keep conclusions within the conditions and scope actually tested.
+
+Use `e2e-verify` to assess whether workflow tests prove the required behavior, or to run a focused verification. It applies across user interfaces, services, background jobs, and command-line tools. Use `evidence-driven-poc` when the main task is to design an experiment for an unresolved assumption.
 
 ## AGENTS.md rule fragments
 
