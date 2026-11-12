@@ -1,0 +1,142 @@
+{
+  "skill_name": "pr-authoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a PR title and body for this independent synthetic color-library change. The required template headings are ## Purpose and ## How should this be tested? . The parser now accepts #RRGGBBAA as well as #RRGGBB. An omitted alpha still means 255; malformed inputs remain rejected. The new example #33669980 yields red 51, green 102, blue 153, alpha 128. The relevant test command is `pnpm test -- color-parser.test.ts`, run from `packages/colors`; no server is required. A recorded targeted run passed 12 checks. Answer the template's questions without adding sections or unrelated procedure. No issue is linked.",
+      "expected_output": "A template-conforming draft explaining alpha-aware input and preserved six-digit behavior, with directory, command, and expected observations in the instructions field rather than substituting the recorded pass count. No invented setup or obligatory no-issue announcement.",
+      "files": [],
+      "assertions": [
+        "The purpose identifies support for eight-digit hex input while preserving opaque six-digit input and malformed-input rejection.",
+        "The testing answer gives the packages/colors directory and supplied pnpm command with expected alpha and existing-format behavior. It does not append the historical 12-check result to a field asking only for instructions.",
+        "The response uses the two required headings without invented setup, extra sections, or a routine announcement that no issue is linked.",
+        "The draft makes its supported behavior claims directly without adding unrelated warnings about properties nobody claimed were established."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Draft an English PR title and body from these synthetic artifacts. Required headings: ## Change / ## Verification performed. A file-listing tool now sorts numbered filenames naturally: report2.txt precedes report10.txt; previously lexical sorting put report10.txt first. The default alphabetical ordering for names without numbers is unchanged. Recorded execution on this revision: from crates/listing, `cargo test --test natural_order`, result 5 passed, 0 failed. The test fixture includes numbered names and names without numbers. No other execution record is supplied. Provide the artifact, not instructions to open a PR.",
+      "expected_output": "A description of the natural ordering correction and preserved ordinary ordering. The verification field reports the named executed run and observed result, not only future instructions, broad-suite claims, or an inventory of unavailable records.",
+      "files": [],
+      "assertions": [
+        "The draft describes report2.txt preceding report10.txt after the change and preserves ordinary alphabetical ordering for names without numbers.",
+        "Verification performed reports the supplied cargo command, execution directory, and 5-passed/0-failed result as a recorded run rather than only a future action.",
+        "The draft does not inflate the targeted run into all tests or all regressions passing, and does not append an unrelated disclaimer about every unperformed check.",
+        "The response is title and body, without publishing instructions or a claim that a PR was created."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Prepare a reviewer-facing PR description for this wholly synthetic event-serialization change. Template: ## Motivation / ## Changes and compatibility / ## Rollout and verification. Existing events use timestamp as integer epoch milliseconds. The new encoder emits an RFC 3339 UTC string with millisecond precision. The new reader accepts both integer and string forms; existing deployed readers only accept the integer form. A new emit_iso_timestamps flag remains off by default. Upgrade every reader before enabling it on writers. With the flag off, writers retain the old integer format. Other fields and event ordering are unchanged. Database schema changes and old-reader support for the new string encoding are not part of this PR. Explain the rationale: interoperability with consumers that expect standard date strings. No measurement or executed test result exists. Keep the compatibility explanation useful rather than forcing a short summary.",
+      "expected_output": "A substantive description connecting interoperability to the encoder/reader changes, accurately separating preserved behavior from incompatible consumers and specifying readers-first rollout and verification of both flag states and input forms.",
+      "files": [],
+      "assertions": [
+        "The description connects standard-date-string interoperability to RFC 3339 UTC encoding while preserving millisecond precision.",
+        "It distinguishes new readers accepting both forms from existing readers accepting integers only, without calling the new encoding universally backward compatible.",
+        "It retains the off-by-default flag, old writer behavior when off, and upgrading all readers before enabling the flag on writers.",
+        "It preserves unchanged other fields and ordering and excludes database schema changes and support for string encoding in old readers.",
+        "Verification concerns both flag states and supported reader inputs without inventing measured benefits or completed runs, and useful compatibility detail is not replaced by a generic summary.",
+        "The proposed rollout and verification are not followed by an inventory of missing measurements or execution records."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Write an English PR draft for this independent synthetic inventory app change. Required headings: ## Change / ## How to verify. Offline stock-count edits now survive an app restart and upload exactly once when connectivity returns. The existing online edit flow is unchanged. Manual verification requires this order: start online with a disposable item at count 10 and confirm it has no pending edits; disconnect; change count to 12; fully close and reopen the app while still offline; confirm 12 and one pending edit; reconnect; confirm the server has 12 and no duplicate history entry, then confirm the pending edit is cleared. A server-history screen is available for checking this. Do not invent a CLI or a test run; no automation was executed. Preserve the sequence needed to establish these states.",
+      "expected_output": "A draft that explains restart-safe offline edits and unchanged online behavior, with an ordered manual workflow preserving offline restart, queue state, server value, duplicate-history detection, and completion. It does not compress away required transitions or invent automation.",
+      "files": [],
+      "assertions": [
+        "The change description explains restart-safe offline edits, exactly-once upload on reconnection, and preserved online editing.",
+        "The manual instructions establish the disposable item's initial state, disconnect before editing, and fully restart while still offline before checking local value and pending work.",
+        "After reconnection the instructions check server value 12, no duplicate history entry, and cleared pending work, not merely a success notification.",
+        "The response keeps meaningful order instead of forcing a single command or unordered summary, without inventing CLI commands or executed checks."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Draft a concise English PR title and body for a synthetic documentation-only change. There is no PR template and no prescribed section structure. The photo editor already supports keyboard shortcuts for rotate, crop, and reset zoom; the patch adds a reference table for these existing actions to the user guide so people can discover them without opening each menu. No shortcut or runtime code changes. No execution record is supplied or requested. Explain what the documentation enables; do not turn this into a release checklist.",
+      "expected_output": "A proportionate description of improved shortcut discoverability, accurately framed as documentation for existing behavior, without invented runtime changes, mandatory empty sections, or an unsolicited validation-status footer.",
+      "files": [],
+      "assertions": [
+        "The draft explains documenting existing rotate, crop, and reset-zoom shortcuts to improve discoverability rather than adding new shortcuts or changing runtime behavior.",
+        "The body is proportionate to the focused documentation change and does not impose empty testing, risk, or rollout sections.",
+        "The response does not add a routine unrun-tests notice, an unrelated correctness disclaimer, or an invented execution result."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Make one focused correction to this synthetic PR draft: the test must be run from tools/pdf, not packages/pdf. Keep the title, all other text, and the command unchanged. Return only the corrected title and body.\n\n# Preserve invoice item order in generated PDFs\n\n## Summary\nKeep invoice lines in their entered order when generating a PDF. Previously, the renderer sorted them by label, which separated explanatory lines from the items they describe.\n\nCurrency formatting and subtotal calculation are unchanged. The change does not alter the order stored in the invoice record.\n\n## How should this be tested?\nFrom `packages/pdf`, run:\n\n```sh\npython -m pytest tests/test_item_order.py\n```\n\nVerify that a PDF preserves the supplied item sequence, including explanatory lines, while the existing subtotal and currency cases continue to pass.",
+      "expected_output": "The original draft with only the working-directory correction, preserving command, rationale, unchanged contracts, and expected observations.",
+      "files": [],
+      "assertions": [
+        "The test working directory changes from packages/pdf to tools/pdf.",
+        "The title, rationale, preserved currency/subtotal and stored-order behavior, command, and verification observations retain their original wording.",
+        "The response is only the corrected artifact, without a replacement summary, extra changes, status notices, or publication claims."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Review this synthetic PR draft, giving concrete findings and minimal corrections rather than a full rewrite. Current diff: `timeout = options.timeout || 30` becomes `timeout = options.timeout ?? 30`. The existing contract says explicit zero disables the timeout; omitted or null retains the 30-second default. A targeted regression test was added, but there is no execution record. Retry behavior and dependencies are unchanged. The template requires ## Purpose, ## How should this be tested?, and an execution checkbox. Draft:\n\n# Change the default timeout to zero\n\n## Purpose\nDisable retries so requests can never fail.\n\n## How should this be tested?\nAll tests passed; nothing else is needed.\n\n- [x] I ran the relevant checks.",
+      "expected_output": "A source-grounded review identifying the incorrect default and retry claims, failure to describe preserving explicit zero, substitution of unsupported pass claims for testing instructions, and unsupported checked execution box, with minimal correction directions.",
+      "files": [],
+      "assertions": [
+        "The review identifies that the default remains 30 seconds and the actual correction is preserving explicit zero, not changing the default.",
+        "The review rejects claims about disabling retries or making requests never fail because they do not match the diff.",
+        "The review identifies the testing answer as both unsupported execution evidence and the wrong answer to a verification-instructions question, and does not invent a test command.",
+        "The review flags the checked execution box as unsupported and distinguishes adding a regression test from running it.",
+        "The response gives concrete findings and minimal corrections rather than a complete unsolicited rewritten PR, and does not recommend adding a routine status footer to the body after clearing the unsupported checkbox."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Draft a reviewer-facing PR title and body from these complete, independent synthetic sources. There is no template. CSV importer diff: duplicate column headers are now rejected before inserting any rows; comparison trims outer whitespace but remains case-sensitive. Previously the last duplicate column silently overwrote earlier values. Repeated cell values are still allowed, and `Code` and `code` remain distinct headers. This prevents unnoticed data loss while preserving existing case-sensitive mappings. The same diff adds process-notes.md reminders to follow coding standards, keep changes focused, and review one's work. The author followed those reminders. No execution evidence is requested.",
+      "expected_output": "A substantive description of the duplicate-header protection, data-loss rationale, pre-insert rejection, and relevant normalization and compatibility boundaries, without promoting generic process reminders or adherence into the change summary.",
+      "files": [],
+      "assertions": [
+        "The description explains the old last-column-wins data loss and the new duplicate-header rejection before any rows are inserted, rather than merely saying import validation improved.",
+        "It preserves trimmed-header comparison, case sensitivity including distinct Code and code headers, and permission for repeated cell values.",
+        "The body does not treat newly documented coding standards, focused-work reminders, or the author's adherence as distinctive changes worth announcing.",
+        "It returns a usable title and body with the substantive explanation intact, without inventing execution evidence or adding a routine missing-results notice."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Write a title and body for this independent synthetic documentation-only PR. Complete diff in release-policy.md: previously release publishers could publish bundles without a signed manifest; the new instructions require a signed manifest containing a SHA-256 digest for every bundle and require the publication job to verify each digest before promotion. This prevents a mirror from serving an unverified or mismatched bundle. The requirement covers emergency releases too; already archived releases are exempt. The file also newly reminds contributors to discuss respectfully, follow project conventions, and review changes carefully. This patch changes documented release requirements only, not publication-job code. There is no PR template or requested test-results field.",
+      "expected_output": "A description of the concrete new signing and verification obligations, their integrity rationale and applicability, clearly distinguished from implementation of enforcement and from generic contributor norms.",
+      "files": [],
+      "assertions": [
+        "The draft identifies the change from optional unsigned publication to a signed manifest with a SHA-256 digest for every bundle and digest verification before promotion.",
+        "It explains preventing unverified or mismatched mirrored bundles and retains that emergency releases are covered while existing archived releases are exempt.",
+        "It accurately describes documentation of requirements, not implemented job enforcement or a claim that the author complied with release policy.",
+        "It omits announcements of generic respectful-discussion, convention-following, and careful-review norms despite their factual presence in the diff, without suppressing the meaningful release constraints.",
+        "It gives substantive change-specific content rather than reducing the policy change to a vague claim of clearer guidance."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Review this wholly synthetic PR draft for maintainer usefulness. Return concrete findings and minimal corrections, not a rewritten PR. Complete sources: webhook dispatch previously used one shared draining loop, so a stalled subscriber blocked delivery to all subscribers. The diff gives each subscriber an independent drain cursor; event order remains guaranteed within each subscriber, not across subscribers. The existing 100-pending-event limit still applies per subscriber, and events are not dropped. HTTP payloads are unchanged. A newly added engineering note says to follow project conventions, keep edits scoped, and review changes before submission; the author did so. Draft, all factually true:\n\n# Update webhook dispatch\n\nThis change follows project conventions. The implementation was kept focused, and the changes were reviewed before submission. The engineering note now records these practices. Webhook dispatch uses independent subscriber cursors.\n\nNo template or execution-results field applies.",
+      "expected_output": "A review that recognizes factual accuracy is insufficient, identifies the missing head-of-line-blocking rationale and delivery guarantees, and recommends replacing irrelevant compliance content with those explanations while preserving meaningful constraints.",
+      "files": [],
+      "assertions": [
+        "The review identifies that factually supported adherence and engineering-note statements dominate the draft without helping explain the webhook change; it does not accept the body merely because every claim is true.",
+        "It calls for explaining how the shared loop let one stalled subscriber block others and how independent subscriber cursors change that behavior.",
+        "It calls for retaining the per-subscriber ordering boundary, per-subscriber 100-pending limit, no-drop guarantee, and unchanged HTTP payloads as relevant constraints rather than dismissing them as generic assurances.",
+        "It recommends specific missing explanations and removal of irrelevant process material, not just shortening the draft to a vague dispatch-improvement claim.",
+        "The response is findings with minimal correction directions, not an unsolicited full rewrite or invented verification report."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Revise this independent synthetic PR title and body for maintainer usefulness using these complete sources. The archive tool previously omitted symbolic links, so restored build trees lost links needed to find shared toolchains. New opt-in `preserve_links` writes v3 archives with link entries; it remains off by default, preserving v2 output. New restore tools read v2 and v3; old restore tools reject v3, so restore tools must be upgraded before enabling link preservation. Links must be relative and resolve inside the archive root; other links are rejected. A changed engineering note adds general reminders to follow conventions, keep work focused, and review edits. The author followed them. No template or test-results field applies.\n\nDraft:\n# Improve archive creation\n\nThe patch follows our engineering conventions. It keeps the work focused and was reviewed before submission. The engineering note now documents these good practices.\n\nArchives can preserve symbolic links so restored build trees can find shared toolchains. This avoids manually rebuilding those links after extraction.\n\nLink preservation is opt-in and leaves v2 output as the default. New restore tools read both versions, but old tools reject v3; upgrade restore tools before enabling preservation.",
+      "expected_output": "A usable revised title and body replacing generic compliance material with the specific archive behavior, while preserving the existing toolchain rationale and compatibility explanation and adding the meaningful path-safety constraint.",
+      "files": [],
+      "assertions": [
+        "The revision explains preserving symbolic links for restored build trees to locate shared toolchains, retaining why manual reconstruction was previously necessary rather than giving a vague archive-improvement summary.",
+        "It identifies preserve_links as opt-in, v3 link entries, and unchanged default v2 output.",
+        "It retains new readers accepting both versions, old readers rejecting v3, and the restore-tools-first upgrade requirement.",
+        "It includes the relative, within-archive-root link constraint and rejection of other links as relevant behavior, not irrelevant reassurance.",
+        "It removes routine adherence and engineering-process announcements while preserving substantive rationale and compatibility detail, and does not invent execution results or append a missing-results footer.",
+        "The response returns a usable revised title and body rather than only review advice or an empty one-line description."
+      ]
+    }
+  ]
+}

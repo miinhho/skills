@@ -1,0 +1,91 @@
+{
+  "skill_name": "issue-authoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Draft an English bug issue for a desktop photo viewer. These scenario details are synthetic. In version 2.4 on Windows 11, portrait JPEGs with an EXIF orientation tag appear sideways in the thumbnail grid, but the same files have the correct orientation when opened individually. JPEGs without the tag display correctly in both views. The expected behavior is consistent orientation in the grid and individual view. There is no sample attachment or confirmed cause. No project template is available. Use the facts supplied; return a title and body only.",
+      "expected_output": "A standalone bug report identifying the thumbnail-only EXIF orientation discrepancy, affected version/platform and contrasting cases, with expected consistency and no invented attachment, diagnosis, command, or additional reproduction fact.",
+      "files": [],
+      "assertions": [
+        "The issue identifies incorrect portrait JPEG thumbnail orientation with an EXIF tag while individual view renders the same files correctly.",
+        "The draft retains the supplied version, platform, and unaffected no-tag comparison without inventing frequency, sample files, or reproduction evidence.",
+        "The expected result is consistent correct orientation in both views, not rotating all original image files or prescribing an unsupported cause.",
+        "The response is a usable title and body rather than a demand for completed diagnosis or a claim of publication.",
+        "The draft does not add optional context solely to announce unavailable attachments or an incomplete diagnosis."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Prepare a feature issue for a calendar app in English from these synthetic planning notes. Original request, April 2: make every calendar start on Monday. Accepted clarification, April 5: provide a per-user Sunday/Monday week-start preference, retain the existing default for users who do not opt in, and persist the selection across sign-out and sign-in. The use case is people coordinating with teams that use a different first day of the week. A later April 7 comment suggests replacing personal preferences with an organization-wide setting; that suggestion has not been accepted. No implementation has been chosen. Give an issue draft, not a changelog or implementation.",
+      "expected_output": "A motivated feature request based on the accepted per-user preference, preserving the existing default and persistence requirement, without silently reverting to the original global change or adopting the newest unaccepted organization-wide proposal.",
+      "files": [],
+      "assertions": [
+        "The requested capability is a per-user Sunday/Monday week-start preference with the supplied coordination use case.",
+        "The draft preserves the current default for users who do not opt in and persistence across sign-out and sign-in.",
+        "The draft follows the accepted clarification rather than the original forced Monday change or the newer unaccepted organization-wide replacement.",
+        "The draft does not invent a storage design, claim implementation, or present an unresolved suggestion as an agreed decision."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a technical improvement issue from this entirely synthetic context. A local document search tool keeps newly indexed document metadata in memory and saves it only on clean exit. An unexpected process exit therefore loses all indexing progress since the last clean exit, requiring a costly rescan of large folders. Introduce durable checkpoints during indexing. Completed checkpoints must be readable after restart, and an interrupted checkpoint must not replace the previous valid checkpoint. Keep the existing command-line options and on-disk index compatibility; switching storage engines and adding remote synchronization are outside scope. Checkpoint frequency and the write strategy remain open because excessive writes may reduce indexing throughput. Keep this rationale, the tradeoff, and verification needs; no particular implementation or numerical target has been selected.",
+      "expected_output": "A substantive improvement issue connecting lost progress to durable checkpoints, preserving recovery atomicity, compatibility, explicit exclusions, and the unresolved throughput tradeoff. Verification concerns recovery after complete and interrupted writes rather than fabricated timings or a decided storage algorithm.",
+      "files": [],
+      "assertions": [
+        "The issue explains why saving only on clean exit loses indexing progress and why rescanning large folders matters.",
+        "The desired checkpoint behavior preserves the last valid checkpoint when a newer write is interrupted and allows completed checkpoints to be read after restart.",
+        "Existing CLI options and on-disk compatibility are preserved; storage-engine migration and remote synchronization remain outside scope.",
+        "Checkpoint frequency and write strategy remain open, with the throughput versus write-frequency tradeoff retained and no invented performance target.",
+        "Verification addresses recovery after successful and interrupted checkpoints without claiming checks already ran."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Draft an English testing-task issue using exactly these supplied project headings: ## Goal, ## Scenarios, ## Completion. This is a synthetic backup utility. Restore already works but is not covered by automated workflow checks. Add coverage for restoring an archive to an empty destination, rejecting a corrupted archive, and rejecting a wrong encryption password. For the successful restore, compare file contents, relative paths, and modification times with the original fixture. For both rejection cases, verify that existing destination files remain unchanged. The fixtures and destination must be disposable; checks must not touch a user's real backup. This task does not request product changes. No command or previous test result is provided.",
+      "expected_output": "A template-conforming coverage issue that preserves all successful and rejection scenarios, meaningful data-integrity and isolation evidence, and the testing-only scope, with no fabricated execution command or product defect.",
+      "files": [],
+      "assertions": [
+        "The draft uses the three supplied project headings and frames the work as workflow coverage rather than implementing or repairing restore.",
+        "The successful restore is checked against original file contents, relative paths, and modification times, not merely a successful exit or presence of some files.",
+        "Corrupted archives and wrong passwords are both rejected while existing destination files remain unchanged.",
+        "The issue requires disposable fixtures and destinations without touching real user backups, and does not invent test commands or previous results."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Make one focused edit to this synthetic issue: remove the unsupported adoption estimate paragraph. Keep the title and every other paragraph unchanged. Return only the edited issue.\n\n# Keep subtitle language after restarting playback\n\nSelecting Spanish subtitles works for the current session, but reopening the same video selects English again. The saved audio-language preference survives the same restart.\n\nThis was observed in the desktop player version 1.3 with a video that contains English and Spanish subtitle tracks.\n\nThis affects 90% of all users and is the most common reason people uninstall the player.\n\nReopening the video should restore the previously selected subtitle language when that track is available. If the video does not contain the saved language, preserve the existing fallback behavior.\n\nThe work is limited to subtitle preference persistence. Changing the audio preference or track-selection fallback is outside scope.",
+      "expected_output": "The supplied issue with only the unsupported user-adoption paragraph removed; all observed conditions, the audio comparison, expected subtitle behavior, fallback guarantee, and scope remain intact.",
+      "files": [],
+      "assertions": [
+        "The unsupported 90-percent adoption and uninstall estimate paragraph is removed.",
+        "The title and all unaffected paragraphs retain their original wording, including the audio-preference comparison and version and track context.",
+        "The saved-language requirement, existing fallback behavior, and explicit scope exclusions are preserved in full.",
+        "The response contains only the requested edited issue, not a summary, a new solution, or a publication claim."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Review this synthetic feature-issue draft; give concrete findings and minimal corrections, not a full rewrite. Source requirements: a batch file-renaming tool needs a preview mode so users can inspect proposed names before committing changes. Preview must make no filesystem changes and must be usable offline. The existing non-preview rename command must keep working. No service migration, account system, or new filename syntax has been requested. Draft to review:\n\n# Replace the rename engine\nMove all renaming to a hosted service and require an account. In preview mode, rename files first and display the results afterward. Introduce a new filename pattern language at the same time.\n\nThe desired behavior is self-evident, so no use case is needed.",
+      "expected_output": "Review findings identify the wrong engine-replacement framing, preview mutations, online/account requirements, unrelated syntax expansion, and missing motivation, tied to the supplied constraints with minimal correction directions rather than an unsolicited replacement issue.",
+      "files": [],
+      "assertions": [
+        "The review identifies that renaming files during preview violates the no-filesystem-changes requirement.",
+        "The review identifies that a hosted service and mandatory account conflict with offline use or add unrequested scope.",
+        "The review calls out engine replacement and the new filename syntax as unrelated expansion and preserves existing non-preview rename behavior.",
+        "The review asks for the actual inspect-before-commit use case instead of accepting that motivation is self-evident, and provides findings rather than a full rewritten issue."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Prepare a public bug-issue draft for a mail client from these synthetic diagnostics. Sending mail fails after a saved account credential is changed; receiving mail continues to work. The server response is `535 Authentication credentials invalid`. The log also contains `Authorization: Bearer TEST_ONLY_INVALID_TOKEN_73` and the local account identifier `account@example.test`; neither is needed to describe or reproduce the failure. A private log file exists but is not authorized for upload. Keep useful diagnostic information in the draft without posting or uploading anything. No root cause is established.",
+      "expected_output": "A public-facing draft retaining the send/receive contrast, credential-change condition, and relevant 535 response while excluding or safely substituting unnecessary token/account data, without uploading the private log or inventing a cause.",
+      "files": [],
+      "assertions": [
+        "The draft describes failed sending after a saved credential change while receiving still works, and preserves the relevant 535 authentication error.",
+        "The draft does not reproduce the supplied bearer token or unnecessary account identifier; any diagnostic excerpt uses safe redaction or omits them.",
+        "The response does not claim to upload the private log, publish the issue, independently reproduce the failure, or establish a root cause.",
+        "The public issue body describes the diagnostic behavior rather than enumerating missing metadata, redaction decisions, or private-log upload permissions."
+      ]
+    }
+  ]
+}

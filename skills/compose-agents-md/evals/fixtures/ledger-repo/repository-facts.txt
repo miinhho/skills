@@ -1,0 +1,13 @@
+Repository facts supplied by the fixture maintainer
+
+This is a small dependency-free Python library. ledger/store.py owns account balances. A separately owned export subtree consumes the public balance_for interface; callers must not duplicate balance lookup or maintain a second balance cache. Changes to the public interface must be deliberate and coordinated.
+
+The maintained reader-facing API contract is docs/api.txt. Update it when guarantees, errors, or supported behavior change. Persistent implementation history and debugging notes belong in the existing local work-queue ticket, not in API documentation. Do not introduce another memory document or a parallel record store.
+
+The local work queue is authoritative for task history. This project does not use GitHub issues or PRs. The inherited generated GitHub guidance is stale and is to be replaced, not treated as a manual agreement.
+
+The complete documented check command is python -m unittest discover -s tests. It is offline and uses Python's standard library. There is no npm project, package.json, Node dependency, or npm check here. No checks need to run merely to refresh instruction text.
+
+The authoritative supplied fragment source revision and bodies are in inputs/fragment-bundle.json. The bundle revision identifies this synthetic source snapshot; do not substitute a repository commit or invent a hash. Fragment selection is an applicability judgment, not a requirement to include every fragment verbatim.
+
+AGENTS.md contains one generated section between human-readable comments. All material before and after that section is manually owned and must remain unchanged. ledger/export/AGENTS.md is the only nested instruction file, and its output-order rule applies only to exports. No repository-specific task skills exist. The parent checkout and files outside this fixture are not part of this target repository.
