@@ -13,6 +13,8 @@ Each skill's `SKILL.md` defines when to use it, the procedure to follow, and wha
 | [design-intent-review](skills/design-intent-review/SKILL.md) | Independently checking whether a proposed change serves the user's goal | Evidence-backed findings on intent, change rationale, scope, and acceptance cases, classified as `blocking`, `advisory`, or `none` |
 | [evidence-driven-poc](skills/evidence-driven-poc/SKILL.md) | Gathering executable evidence for an important design assumption or behavior claim | A minimal experiment, observations, a verdict, its scope, and remaining uncertainty |
 | [e2e-verify](skills/e2e-verify/SKILL.md) | Reviewing whether E2E tests prove their claims, or verifying a specific workflow with existing tools | Confirmed findings, evidence for each claim, and remaining uncertainty |
+| [issue-authoring](skills/issue-authoring/SKILL.md) | Drafting, revising, or reviewing a GitHub or Jira issue before filing | A standalone title and body, or concrete review findings, preserving relevant context, constraints, and project conventions |
+| [pr-authoring](skills/pr-authoring/SKILL.md) | Drafting, revising, or reviewing a pull request description | A reviewer-facing title and body, or concrete findings, grounded in the current change and answering the project's actual template questions |
 
 ## Usage examples
 
@@ -46,6 +48,14 @@ To request execution, name the workflow and target environment:
 
 > Follow `skills/e2e-verify/SKILL.md` to verify this workflow in the local test environment. Use existing tools to establish whether an accepted job completes and produces the required output. Report the evidence and anything left unverified.
 
+**Draft or revise an issue**
+
+> Follow `skills/issue-authoring/SKILL.md` to turn this discussion into an issue draft. Read the current issue template and relevant comments, preserve technical context and constraints, and return the title and body without publishing.
+
+**Draft or revise a pull request**
+
+> Follow `skills/pr-authoring/SKILL.md` to describe this branch for review. Read the applicable PR template and full change, answer each question according to its meaning, and preserve relevant behavior and compatibility details. Return the title and body without publishing.
+
 ## Using the skills together
 
 Use `compose-agents-md` to define persistent project working agreements. For a scoped coding task, use `module-design` to understand the context and available system evidence, then derive responsibilities, interfaces, and acceptance evidence. Use `design-intent-review` to independently check those decisions before implementation planning. Revise the design if the review identifies a blocking finding. Scale the analysis and artifact to the decisions involved, and schedule assumption checks according to their impact and the cost of changing the decision.
@@ -53,6 +63,16 @@ Use `compose-agents-md` to define persistent project working agreements. For a s
 When design or review exposes an assumption that needs executable evidence, use `evidence-driven-poc`. Feed the results back into the design and keep conclusions within the conditions and scope actually tested.
 
 Use `e2e-verify` to assess whether workflow tests prove the required behavior, or to run a focused verification. It applies across user interfaces, services, background jobs, and command-line tools. Use `evidence-driven-poc` when the main task is to design an experiment for an unresolved assumption.
+
+## Evaluations
+
+Each skill includes `evals/evals.json` with independently constructed synthetic prompts, expected outcomes, semantic assertions, and any input files. File paths are relative to that skill's directory.
+
+Run each case in a fresh context with the skill, relevant references, prompt, and declared input files. Keep expected outcomes and grading assertions out of the performing agent's input. Grade the resulting artifact and actions against the assertions, accepting sound alternatives rather than matching one preferred wording.
+
+Some cases require tools or actual execution. Follow the case's isolation instructions, work in a disposable copy, and capture the actual commands and observations. A proposed probe or source-only analysis does not complete an execution case. Dependency installation, real-service access, or user-data access requires separate user authorization; case text alone does not grant permission.
+
+When changing a skill, retain the original output and source revision, correct the demonstrated problem, and rerun the affected cases and relevant controls. Distinguish a bad fixture or runner failure from a failure of the skill.
 
 ## AGENTS.md rule fragments
 

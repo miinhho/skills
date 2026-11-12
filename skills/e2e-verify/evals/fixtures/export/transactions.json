@@ -1,0 +1,9 @@
+{
+  "accountId": "acct-kite",
+  "currency": "USD",
+  "transactions": [
+    { "id": "sale-1", "amount": 20 },
+    { "id": "sale-2", "amount": 30 },
+    { "id": "refund-1", "amount": -8 }
+  ]
+}

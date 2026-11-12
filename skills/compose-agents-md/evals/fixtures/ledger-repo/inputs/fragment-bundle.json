@@ -1,0 +1,22 @@
+{
+  "source_revision": "fixture-bundle-r12",
+  "provenance": "Synthetic fixture snapshot of the four compose-agents-md reference fragments. This label is supplied test input, not a claim about the real skills repository's Git revision.",
+  "fragments": [
+    {
+      "id": "docs-comments",
+      "text": "## Documentation and comments\n\nWrite for the reader performing a task:\n\n- lead with what the API guarantees or when to use it;\n- document errors, side effects, ownership, and unsupported behavior;\n- do not use user-facing documentation as agent memory; create and maintain a separate memory document for persistent implementation history, debugging notes, or design scratch work;\n- do not narrate code that is already clear from names and types;"
+    },
+    {
+      "id": "github-history",
+      "text": "# GitHub work history\n\n- Link a completed task to its originating GitHub Issue and the relevant PR or commit.\n- Record design changes, verification evidence, and unresolved review findings in the task's durable GitHub record."
+    },
+    {
+      "id": "module-ownership",
+      "text": "# Module ownership\n\n- When changing a module, identify its caller-facing interface and the owner of each affected state before editing.\n- Reuse existing behavior at its owner rather than adding a second implementation of the same rule.\n- Keep cross-module changes coordinated through the owning interface; record a deliberate interface change in the task design."
+    },
+    {
+      "id": "verification",
+      "text": "# Verification\n\n- Add or update tests for changed observable behavior at a stable interface when the change warrants it.\n- Run focused checks for changed behavior and the repository's relevant required checks before reporting completion.\n- Report the commands, results, and any verification that could not be performed."
+    }
+  ]
+}

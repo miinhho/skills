@@ -18,7 +18,7 @@ State:
 - the observable outcome that would support it;
 - a realistic counterexample or result that would weaken it;
 - the system boundary and variables held constant;
-- what the experiment cannot establish.
+- evidence limitations that affect interpretation of this claim.
 
 Prefer a comparison that isolates the mechanism. 
 Do not compare systems with different responsibilities on a metric that inherently favors one of them.
@@ -68,7 +68,9 @@ Report:
 - observations and relevant cost;
 - failure classification, if any;
 - verdict: supported, counterexample found, or inconclusive;
-- exact scope of the verdict and the next unresolved uncertainty.
+- claim-specific scope and any material unresolved decision.
 
 Separate deterministic guarantees, empirical observations, and interpretation.
+
+Keep qualifications relevant to the stated claim. A valid counterexample can settle a universal claim without broader sampling; do not dilute that conclusion by listing unrelated untested properties. Stop when the consequential uncertainty is resolved, and propose further work only when it changes the decision.
 Update any durable evidence record only with work that was actually run and inspected.

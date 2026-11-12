@@ -1,0 +1,86 @@
+{
+  "skill_name": "compose-agents-md",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use compose-agents-md to refresh the root AGENTS.md in the supplied disposable ledger repository. The repository root is evals/fixtures/ledger-repo (or its disposable copy when a harness supplies one). Read the explicitly supplied AGENTS.md, repository-facts.txt, inputs/fragment-bundle.json, ledger/export/AGENTS.md, ledger/store.py, tests/test_store.py, and docs/api.txt. These are the complete relevant instruction and project sources; do not search outside this fixture or use the fixture's parent checkout as the target. The bundle contains the authoritative fragment texts and their source revision. Compose the instructions in place, respecting the repository's existing ownership of its manual text. Explain the selection and omissions, and report what changed. Do not run checks or change implementation files for this composition task.",
+      "expected_output": "The actual root file preserves all manually maintained material, replaces the stale generated material rather than adding another copy, and contains a concise project-adapted selection of documentation/comments, module ownership, and verification guidance with the supplied fragment IDs and revision. GitHub workflow requirements and the obsolete npm command disappear from the generated material. The nested export policy stays scoped. The supplied Python check command may be included accurately or left in the existing manual section without duplication. The report identifies the omitted GitHub fragment and the reason; implementation and nested instructions remain untouched.",
+      "files": [
+        "evals/fixtures/ledger-repo/AGENTS.md",
+        "evals/fixtures/ledger-repo/repository-facts.txt",
+        "evals/fixtures/ledger-repo/inputs/fragment-bundle.json",
+        "evals/fixtures/ledger-repo/ledger/export/AGENTS.md",
+        "evals/fixtures/ledger-repo/ledger/store.py",
+        "evals/fixtures/ledger-repo/tests/test_store.py",
+        "evals/fixtures/ledger-repo/docs/api.txt"
+      ],
+      "assertions": [
+        "The resulting root AGENTS.md preserves the original manual introduction, contributor agreements, exact quoted compatibility warning, check command, and closing owner-contact note; no manual instruction is silently weakened or overwritten.",
+        "The resulting file has one current generated rules section, not both the retired and current sections; its provenance identifies the selected actual fragment IDs and fixture-bundle-r12, and it does not retain the retired revision as the active source.",
+        "The composed instructions preserve the substantive responsibilities of documentation/comments, module ownership, and focused verification without adding a GitHub record requirement or retaining npm test as a project command; the report explains why the GitHub fragment was omitted.",
+        "Export-only output-order guidance is not made a repository-wide requirement, and ledger/export/AGENTS.md, implementation files, tests, and API documentation are unchanged.",
+        "The response reports actual composition changes without claiming tests were run, and any command or referenced project path it introduces is supported by the supplied files."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Refresh an existing generated section and show the complete proposed root AGENTS.md; this is a closed-context composition review, not a filesystem task. Available fragments are the four skill reference fragments, with authoritative source revision ruleset-27. Current project facts: this is a two-module, dependency-free CLI; all work is tracked in GitHub issues and PRs; the documented check is `python -m unittest discover -s checks`; there is no maintained API documentation and no current need for a persistent implementation-memory document. Existing root file:\n\n# Tool workspace\n\nMANUAL: Shell out only through process_runner; its argument list must remain an array.\n\n<!-- generated rules begin -->\nSource revision: ruleset-19\nFragments: module-ownership, github-history\nBefore changing a module, identify its public interface and state owner. Reuse behavior at its owner. Coordinate interface changes explicitly.\nLink completed work to its GitHub issue and PR or commit; keep design changes and verification evidence in that record.\n<!-- generated rules end -->\n\nMANUAL: The Windows quoting examples in examples/quoting.txt are regression inputs, not commands to execute.\n\nThe only nested instruction file, checks/AGENTS.md, says to keep shell-free test doubles. A repository skill called regression-investigation already describes how to isolate failing argument-vector cases. Select the persistent rules warranted now, update the old section, and account for what a second run with the same inputs should do.",
+      "expected_output": "One updated generated section replaces the old one, retaining the meaningful ownership and GitHub history requirements and adding proportionate verification guidance using only the documented command if a command is included. It records ruleset-27 and selected fragment IDs, preserves both manual sections, leaves scoped test-double rules and investigation methods at their existing homes, and explains that unchanged inputs must not accumulate additional sections or repeated rules. Unneeded documentation/memory guidance may be omitted with an applicability explanation.",
+      "files": [],
+      "assertions": [
+        "The proposed complete file contains both manual instructions with their original meaning and keeps the generated update confined to the existing generated section.",
+        "There is only one active copy of each selected fragment's substantive guidance and only one active generated section, with current ruleset-27 provenance and selected IDs; the described repeat run would not append or duplicate them.",
+        "The proposal preserves module ownership and durable GitHub issue/PR-or-commit traceability, including recording design, verification, and unresolved review findings where applicable, while adding supported focused-check and result-reporting guidance.",
+        "The response does not globalize the nested shell-free-test-double rule or copy the regression-investigation procedure into always-loaded root instructions, and it does not invent another check command or a mandatory new memory document."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Compose proposed instruction edits for this synthetic repository using the four compose-agents-md reference fragments at source revision bundle-6. Root AGENTS.md currently contains only: `This repository contains the live gateway and an offline reconciliation tool. Never commit production credentials.` The reviewed project inventory is: gateway/handler.py accepts network requests; reconcile/read_log.py consumes immutable audit logs; docs/protocol.txt documents supported client errors; scripts/check_all.py is the documented offline check entry point (`python scripts/check_all.py`). gateway/AGENTS.override.md says: `Only this gateway subtree permits request retries, and only for requests carrying an idempotency key. No handler may write to the audit-log files.` reconcile/AGENTS.md says: `Operate on an explicit local snapshot; never connect to a live gateway. Audit-log ordering is part of the reconciliation contract.` A repository skill at .agents/skills/incident-replay/SKILL.md already owns the step-by-step incident replay procedure. Persistent implementation history lives in engineering-notes.txt, not docs/protocol.txt. Work is recorded in a local ticket database; no GitHub service is used. The team asks for clearer persistent cross-module responsibilities and maintained protocol documentation, and wants to retain the existing module-specific operational rules. Show which files you would change and their proposed content or precise edits; explain fragment selection. Treat the inventory above as complete.",
+      "expected_output": "The root gains concise applicable ownership, documentation, and verification guidance with source provenance, without duplicating or moving existing local operational rules. The protocol documentation stays reader-facing and existing engineering notes remain the place for persistent implementation history. The root credential rule survives; gateway retry permission is not generalized to reconciliation, reconciliation restrictions do not disable valid gateway operation, the replay skill remains procedural, and GitHub history is omitted for this local-tracker project.",
+      "files": [],
+      "assertions": [
+        "The proposal preserves the root credential restriction and both modules' distinct existing operational semantics: retry permission remains gateway-local, and snapshot-only/no-live-connection guidance remains reconciliation-local.",
+        "Root-level additions address shared interface/state ownership and reuse at the owning module without promoting either module's specialized retry, log-order, or live-connection policy to a universal root rule.",
+        "The proposal keeps task procedures in the incident-replay skill, maintains the separation between protocol documentation and engineering history, and does not create a second memory store or copy the procedure into root instructions.",
+        "Selected fragments and bundle-6 are attributable; GitHub-specific history requirements are omitted; any check command or file reference introduced is supported by the supplied inventory."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review whether a safe persistent AGENTS.md update can be finalized from this complete supplied snapshot. You cannot access an upstream checkout, network, or hidden files. The four reference fragment bodies are available through the skill, but no source revision was included in this snapshot or otherwise supplied. Existing root AGENTS.md is manually maintained: `Parser inputs are untrusted. The recovery scanner owns offset advancement; callers must not advance the cursor on its behalf.` Files supplied by the requester: package.json is exactly `{\"name\":\"token-map\",\"private\":true}`; src/parser.c and src/recovery.c contain the parser and scanner; there is no lockfile, scripts field, CI configuration, build file, or command documentation in this snapshot. The team says the ownership rule is persistent. Separately, today's task request says `for this one emergency patch, touch only src/parser.c and do not run checks before the incident handoff`. An old chat excerpt says `probably npm test, maybe revision main`. The team wants durable guidance, not an incident runbook. Return what can safely be proposed now, distinguish any not-yet-finalizable part, and identify which supplied material is inappropriate for persistent rules.",
+      "expected_output": "The response preserves the meaningful manual ownership and untrusted-input requirements, can propose source-independent ownership/verification wording, and explicitly declines to guess project commands or fragment provenance. It does not write a supposedly finalized provenance-bearing block with an invented revision or unresolved placeholder. It keeps the emergency one-file scope and temporary no-check instruction out of permanent AGENTS.md and treats the speculative chat excerpt as non-authoritative. It names the missing authoritative fragment revision and documented project checks as information gaps rather than manufacturing them.",
+      "files": [],
+      "assertions": [
+        "The response does not infer npm test, a package-manager workflow, C build commands, or another verified command from file extensions or the minimal package manifest; it identifies the lack of authoritative check documentation.",
+        "The response does not claim main, a fabricated hash, a timestamp, or another invented value is the fragment source revision, and it does not present an unresolved revision placeholder as a finalized generated update.",
+        "The emergency restriction to src/parser.c and the temporary prohibition on checks are not converted into permanent repository instructions, while persistent scanner ownership and untrusted-input guidance are retained.",
+        "The response makes useful bounded progress, such as an explicitly provisional rule proposal or selection analysis, and clearly identifies the absent source revision as blocking final provenance rather than pretending the composition is complete."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Assess whether using compose-agents-md should change this small repository. Return the proposed diff, if any, with a selection rationale. The four standard reference fragments are available at known revision fragment-pack-8. The repository is an offline catalog with only records.csv, schema.txt, and AGENTS.md; it has no executable code, modules, generated outputs, APIs, issue service, or reusable task skills. schema.txt defines exactly three columns: code, display_name, retired. Existing manually maintained AGENTS.md is:\n\n# Catalog upkeep\n\nChange catalog entries only against an approved source record. Preserve code values exactly; downstream readers use them as identifiers. Before handing off a catalog edit, compare its header and column count against schema.txt, review changed rows for duplicate codes, and report what was checked and any uncertainty. Keep maintenance notes in the change request, not in records.csv.\n\nThere is no generated section and no intended workflow change. The owner is open to necessary corrections but does not want a rules framework added for its own sake.",
+      "expected_output": "A reasoned no-change result is appropriate, or a genuinely necessary minimal nonduplicative adjustment. Existing manual validation and traceability already fit the repository, while code module, API documentation, automated test, and GitHub rules do not establish new needs. The response should not force all fragments into a generated section, create an empty provenance wrapper, introduce commands or files, or replace working manual instructions just to normalize formatting.",
+      "files": [],
+      "assertions": [
+        "The response accepts a no-change or demonstrably necessary minimal-change outcome rather than treating fragment composition as an obligation to add a generated rules framework.",
+        "The manual constraints on approved sources and exact identifier preservation, along with schema/duplicate review and truthful reporting, remain intact without duplicative restatement.",
+        "The response does not introduce code-module ownership ceremonies, API documentation rules, automated test commands, mandatory memory files, or GitHub issue/PR workflows unsupported by this catalog's actual responsibilities.",
+        "The selection rationale accounts for existing manual coverage and inapplicable fragments; no empty generated section, gratuitous provenance-only edit, or unrelated repository file is proposed."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use compose-agents-md to propose the root instruction update for this independently constructed synthetic documentation repository. The complete manual AGENTS.md is: `# Maintainer agreements\\nKeep runnable examples deterministic. Preserve published function names exactly.` The only other file is docs/functions.md, which documents a public numerical library's inputs, return values, and errors. There is no implementation code, task tracker, engineering journal, or prescribed agent-history workflow in this repository. The maintainer wants persistent documentation-and-comment guidance, not an implementation change. The standard reference fragments are available at the supplied source revision guide-fragments-r2. Show the proposed instruction text and selection rationale. Do not invent repository facts or commands.",
+      "expected_output": "An appropriately scoped documentation guidance update preserving the manual agreements and useful API-writing rules, without introducing an unrequested memory file or new recordkeeping workflow merely because a generic fragment mentions one.",
+      "files": [],
+      "assertions": [
+        "The manual deterministic-example and published-name constraints are preserved, and the update includes useful reader-facing guarantees, inputs, returns, or error documentation.",
+        "The generated guidance does not require creating or maintaining a new agent memory document, engineering journal, or task-record system that the project did not request.",
+        "The response selects documentation-relevant guidance, omits unrelated implementation or GitHub ceremonies and guessed commands, and uses the supplied fragment revision rather than fabricating one.",
+        "The response describes proposed instruction changes without claiming repository edits or checks were executed."
+      ]
+    }
+  ]
+}

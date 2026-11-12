@@ -1,0 +1,27 @@
+{
+  "boundary": "createCachedLoader wraps an asynchronous, read-only lookup keyed by the exact string supplied by the caller. Each wrapper instance owns independent state.",
+  "requirements": [
+    "For a given key, overlapping requests share one unresolved origin lookup, regardless of how long that lookup takes.",
+    "Different keys must not share an origin lookup or a returned value.",
+    "A successful value is fresh for ttlMs logical milliseconds after it becomes available. A lookup at exactly the freshness deadline may start a new origin lookup.",
+    "Origin rejection rejects the waiting requests; a later request may retry."
+  ],
+  "clock": "The injected now function returns a nondecreasing integer logical time. No real timers are required.",
+  "origin": "An origin invocation is observable immediately when load(key) executes. A test-controlled gate can keep it unresolved. On gate release, return a fresh copy of the catalog entry for that exact key.",
+  "catalog": {
+    "cedar": { "revision": 7, "units": 31 },
+    "birch": { "revision": 4, "units": 12 }
+  },
+  "inputs": {
+    "ttlMs": 10,
+    "initialTime": 100,
+    "overlapTimes": [109, 110, 111],
+    "keys": ["cedar", "birch"]
+  },
+  "priorEvidence": {
+    "provenance": "Synthetic handoff record; not a claim that the evaluation author ran this fixture.",
+    "scenario": "Two calls for cedar at logical time 100, with origin held until both calls were issued.",
+    "reportedObservation": "One origin invocation; both callers received revision 7, units 31.",
+    "notCovered": "Time advancing while the first origin lookup remains unresolved."
+  }
+}

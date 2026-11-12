@@ -1,0 +1,5 @@
+Ledger account lookup
+
+Ledger owns account balances. set_balance(account_id, balance) stores a balance for exactly the supplied account identifier. Identifiers are opaque strings; "007" and "7" refer to different accounts.
+
+balance_for(account_id) returns the stored value, including zero, and raises KeyError if the account is absent. Looking up a balance does not mutate the ledger. The API makes no sorted-order guarantee for lookups requested by a caller.

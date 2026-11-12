@@ -15,6 +15,7 @@ Use these to resolve a candidate, not as syntax rules. Follow the actual contrac
 - Trace shared state, reused IDs, parallel workers, ordering, and cleanup to a concrete verdict dependency. Synchronization or isolation may already protect the scenario.
 - Distinguish absence at one instant from absence throughout a required interval. An immediate negative check may be sufficient after an atomic completed operation.
 - Evaluate retries against the contract. A retried pass does not prove first-attempt reliability, but retrying can itself be intended behavior. A contract deadline and an infrastructure timeout are different constraints.
+- Anchor a behavioral deadline to the event named by the contract, not an earlier client action or a later acknowledgement. If that event's time is unavailable, identify the required timing evidence or an observation bound. A timer started before the request can establish a conservative passing result, but its expiry alone cannot establish a product deadline violation when request latency is included.
 
 ## Wrong target
 

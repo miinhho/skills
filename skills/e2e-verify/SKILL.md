@@ -47,8 +47,10 @@ Include:
 - The claim, exercised boundary, source evidence, and commands actually run.
 - Confirmed findings: location, violated requirement, condition causing a wrong verdict, impact, and smallest correction.
 - For runtime behavior: `supported` under the observed conditions, `contradicted`, or `inconclusive`. Source review alone cannot establish a successful run.
-- Missing evidence, substituted dependencies, unexecuted checks, and unresolved attribution.
+- Material evidence gaps, substituted dependencies, or attribution limits that affect the finding or requested conclusion.
 
 Use the repository's severity scheme when available; otherwise describe impact. If no defects are confirmed, say so without adding generic improvement advice. Recommend additional checks only for an evidenced gap relevant to the claim.
+
+Keep qualifications tied to the actual claim and review decision. Do not invent a broader guarantee just to deny it or append a routine list of unrelated properties and unperformed checks.
 
 When fixing a check, preserve the required outcome. Do not make incorrect behavior pass by weakening expectations, suppressing failure, or extending timeouts without evidence.

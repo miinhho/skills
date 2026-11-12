@@ -1,0 +1,11 @@
+Original request
+Simplify the delivery boundary without changing notification delivery or retry behavior. Keep the worker and Outbox public APIs. This is a single-worker, in-process cleanup, not a durability or exactly-once project.
+
+Proposed design
+Use proposed_delivery.dispatch_next in place of delivery.dispatch_next. Remove the queue head immediately before calling the delivery callback so the queue owns pending work only until dispatch starts. The callback owns completion after that handoff. The worker's existing ConnectionError handling remains unchanged; it still asks the scheduler for another attempt. Outbox itself and its public methods stay unchanged.
+
+Proposed acceptance evidence
+Compare old and new delivery functions with an empty queue and one callback that succeeds. Both should return the same statuses, deliver the same message, and leave the same pending IDs. The callback exception path is delegated to the unchanged worker.
+
+Review scope
+The files are complete for the relevant mechanism. The proposed source is a review candidate, not an installed implementation. Review intent, responsibilities, contracts, and acceptance evidence before implementation planning; do not implement a repair.
