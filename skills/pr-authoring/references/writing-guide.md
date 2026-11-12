@@ -35,7 +35,7 @@ Connect the user need to the new behavior. Name important preserved behavior. A 
 
 ### Contract or compatibility change
 
-Name the affected API, data shape, configuration, permission, storage, or command-line contract. Explain relevant old and new behavior, supported consumers, and necessary migration or rollout order. Do not compress these distinctions into a vague improvement claim. A small interface example or version matrix may help when it clarifies actual interactions.
+Name the affected API, data shape, configuration, permission, storage, or command-line contract. Explain relevant old and new behavior, supported consumers, and necessary migration or rollout order. For policy or instruction changes, identify the concrete requirement being introduced or changed, who or what it governs, and its practical effect. Distinguish a new obligation from reminders of generic good practice; explain the obligation rather than announce compliance with it. Do not compress these distinctions into a vague improvement claim. A small interface example or version matrix may help when it clarifies actual interactions.
 
 ### Broad or cross-cutting work
 
@@ -47,13 +47,13 @@ Describe what the work enables, corrects, or protects. Do not imply application 
 
 ## Be precise without defensive prose
 
-A sentence should explain the change, answer a project question, support a claim, or help a review decision. Missing information is not automatically content for the body.
+A sentence should explain the purpose, specific behavior, rationale, impact, compatibility, or requested verification, or otherwise support a concrete review decision. Being factually true or present in the diff does not by itself make a detail useful. Routine announcements about following good practices, complying with guidance, or carrying out the authoring process do not become distinctive change content merely because an instruction or policy file now says them. Missing information is not automatically content for the body either.
 
 Qualify the claim itself when needed. Do not manufacture an expansive interpretation and then deny it. Do not surround a simple, supported observation with warnings about unrelated properties it never claimed to establish.
 
 Keep a real limitation when it affects the stated benefit, compatibility, measurement, or use. Do not add a separate limitations section by habit. Likewise, do not hide a relevant constraint merely to sound confident or fit a short paragraph.
 
-When revising, remove the irrelevant sentence rather than summarizing away the neighboring rationale, examples, or guarantees. Avoid self-evaluation adjectives, repetitive assurances, progress reports, and descriptions of how the draft was produced.
+When revising, remove the irrelevant sentence rather than summarizing away the neighboring rationale, examples, or guarantees. Replace a content-poor description with the missing change-specific explanation, not just a shorter generic claim. Avoid self-evaluation adjectives, repetitive assurances, progress reports, and descriptions of how the draft was produced; retain concrete constraints that explain a real requirement, limitation, or compatibility decision.
 
 ## Public references and their scope
 

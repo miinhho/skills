@@ -85,6 +85,58 @@
         "The review flags the checked execution box as unsupported and distinguishes adding a regression test from running it.",
         "The response gives concrete findings and minimal corrections rather than a complete unsolicited rewritten PR, and does not recommend adding a routine status footer to the body after clearing the unsupported checkbox."
       ]
+    },
+    {
+      "id": 8,
+      "prompt": "Draft a reviewer-facing PR title and body from these complete, independent synthetic sources. There is no template. CSV importer diff: duplicate column headers are now rejected before inserting any rows; comparison trims outer whitespace but remains case-sensitive. Previously the last duplicate column silently overwrote earlier values. Repeated cell values are still allowed, and `Code` and `code` remain distinct headers. This prevents unnoticed data loss while preserving existing case-sensitive mappings. The same diff adds process-notes.md reminders to follow coding standards, keep changes focused, and review one's work. The author followed those reminders. No execution evidence is requested.",
+      "expected_output": "A substantive description of the duplicate-header protection, data-loss rationale, pre-insert rejection, and relevant normalization and compatibility boundaries, without promoting generic process reminders or adherence into the change summary.",
+      "files": [],
+      "assertions": [
+        "The description explains the old last-column-wins data loss and the new duplicate-header rejection before any rows are inserted, rather than merely saying import validation improved.",
+        "It preserves trimmed-header comparison, case sensitivity including distinct Code and code headers, and permission for repeated cell values.",
+        "The body does not treat newly documented coding standards, focused-work reminders, or the author's adherence as distinctive changes worth announcing.",
+        "It returns a usable title and body with the substantive explanation intact, without inventing execution evidence or adding a routine missing-results notice."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Write a title and body for this independent synthetic documentation-only PR. Complete diff in release-policy.md: previously release publishers could publish bundles without a signed manifest; the new instructions require a signed manifest containing a SHA-256 digest for every bundle and require the publication job to verify each digest before promotion. This prevents a mirror from serving an unverified or mismatched bundle. The requirement covers emergency releases too; already archived releases are exempt. The file also newly reminds contributors to discuss respectfully, follow project conventions, and review changes carefully. This patch changes documented release requirements only, not publication-job code. There is no PR template or requested test-results field.",
+      "expected_output": "A description of the concrete new signing and verification obligations, their integrity rationale and applicability, clearly distinguished from implementation of enforcement and from generic contributor norms.",
+      "files": [],
+      "assertions": [
+        "The draft identifies the change from optional unsigned publication to a signed manifest with a SHA-256 digest for every bundle and digest verification before promotion.",
+        "It explains preventing unverified or mismatched mirrored bundles and retains that emergency releases are covered while existing archived releases are exempt.",
+        "It accurately describes documentation of requirements, not implemented job enforcement or a claim that the author complied with release policy.",
+        "It omits announcements of generic respectful-discussion, convention-following, and careful-review norms despite their factual presence in the diff, without suppressing the meaningful release constraints.",
+        "It gives substantive change-specific content rather than reducing the policy change to a vague claim of clearer guidance."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Review this wholly synthetic PR draft for maintainer usefulness. Return concrete findings and minimal corrections, not a rewritten PR. Complete sources: webhook dispatch previously used one shared draining loop, so a stalled subscriber blocked delivery to all subscribers. The diff gives each subscriber an independent drain cursor; event order remains guaranteed within each subscriber, not across subscribers. The existing 100-pending-event limit still applies per subscriber, and events are not dropped. HTTP payloads are unchanged. A newly added engineering note says to follow project conventions, keep edits scoped, and review changes before submission; the author did so. Draft, all factually true:\n\n# Update webhook dispatch\n\nThis change follows project conventions. The implementation was kept focused, and the changes were reviewed before submission. The engineering note now records these practices. Webhook dispatch uses independent subscriber cursors.\n\nNo template or execution-results field applies.",
+      "expected_output": "A review that recognizes factual accuracy is insufficient, identifies the missing head-of-line-blocking rationale and delivery guarantees, and recommends replacing irrelevant compliance content with those explanations while preserving meaningful constraints.",
+      "files": [],
+      "assertions": [
+        "The review identifies that factually supported adherence and engineering-note statements dominate the draft without helping explain the webhook change; it does not accept the body merely because every claim is true.",
+        "It calls for explaining how the shared loop let one stalled subscriber block others and how independent subscriber cursors change that behavior.",
+        "It calls for retaining the per-subscriber ordering boundary, per-subscriber 100-pending limit, no-drop guarantee, and unchanged HTTP payloads as relevant constraints rather than dismissing them as generic assurances.",
+        "It recommends specific missing explanations and removal of irrelevant process material, not just shortening the draft to a vague dispatch-improvement claim.",
+        "The response is findings with minimal correction directions, not an unsolicited full rewrite or invented verification report."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Revise this independent synthetic PR title and body for maintainer usefulness using these complete sources. The archive tool previously omitted symbolic links, so restored build trees lost links needed to find shared toolchains. New opt-in `preserve_links` writes v3 archives with link entries; it remains off by default, preserving v2 output. New restore tools read v2 and v3; old restore tools reject v3, so restore tools must be upgraded before enabling link preservation. Links must be relative and resolve inside the archive root; other links are rejected. A changed engineering note adds general reminders to follow conventions, keep work focused, and review edits. The author followed them. No template or test-results field applies.\n\nDraft:\n# Improve archive creation\n\nThe patch follows our engineering conventions. It keeps the work focused and was reviewed before submission. The engineering note now documents these good practices.\n\nArchives can preserve symbolic links so restored build trees can find shared toolchains. This avoids manually rebuilding those links after extraction.\n\nLink preservation is opt-in and leaves v2 output as the default. New restore tools read both versions, but old tools reject v3; upgrade restore tools before enabling preservation.",
+      "expected_output": "A usable revised title and body replacing generic compliance material with the specific archive behavior, while preserving the existing toolchain rationale and compatibility explanation and adding the meaningful path-safety constraint.",
+      "files": [],
+      "assertions": [
+        "The revision explains preserving symbolic links for restored build trees to locate shared toolchains, retaining why manual reconstruction was previously necessary rather than giving a vague archive-improvement summary.",
+        "It identifies preserve_links as opt-in, v3 link entries, and unchanged default v2 output.",
+        "It retains new readers accepting both versions, old readers rejecting v3, and the restore-tools-first upgrade requirement.",
+        "It includes the relative, within-archive-root link constraint and rejection of other links as relevant behavior, not irrelevant reassurance.",
+        "It removes routine adherence and engineering-process announcements while preserving substantive rationale and compatibility detail, and does not invent execution results or append a missing-results footer.",
+        "The response returns a usable revised title and body rather than only review advice or an empty one-line description."
+      ]
     }
   ]
 }

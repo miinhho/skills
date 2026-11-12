@@ -19,8 +19,8 @@ Check the artifact against the actual request, project instructions, and current
 
 ## Useful depth
 
-- Are the conditions, consequences, decisions, and preserved guarantees needed for review present?
-- Are compatibility, migration, or operational implications explained where they matter?
+- Are the purpose, specific behavior, rationale, conditions, consequences, decisions, and preserved guarantees needed for review present, rather than replaced by a vague summary?
+- Are compatibility, migration, or operational implications explained where they matter? For a policy or instruction change, are the concrete changed requirement and its effect clear rather than merely asserting adherence?
 - Do examples or review pointers make the change easier to assess rather than repeat the prose?
 - Has shortening removed useful technical information, or has a simple change acquired unnecessary ceremony?
 
@@ -33,9 +33,9 @@ Check the artifact against the actual request, project instructions, and current
 
 ## Reader value and tone
 
-- Does each qualification affect an actual claim or review decision?
-- Does any sentence invent an exaggerated interpretation merely to refute it?
-- Can defensive assurances, unrelated caveats, duplicated content, and process narration be removed without losing useful information?
+- Does each detail serve the reader's understanding or a requested answer, rather than qualify for inclusion only because it is true or present in the diff?
+- Does each qualification affect an actual claim or review decision, without inventing an exaggerated interpretation merely to refute it?
+- Can routine good-practice, compliance, and process announcements be removed, including ones newly written in policy files, while preserving substantive explanations and relevant constraints?
 - For a focused edit, is unaffected content preserved rather than replaced with a summary?
 
 ## Artifact and action boundaries

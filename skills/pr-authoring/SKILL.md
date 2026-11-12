@@ -19,7 +19,7 @@ Do not carry a template or house style over from another repository. Keep requir
 
 Inspect the full intended change against its base, not only the last commit. Read relevant code, tests, documentation, linked requirements, and decisions. Commit messages and the existing PR body are clues, not substitutes for the current diff. When updating a description, read the existing text first and identify what has actually changed.
 
-Establish what changes, why it is needed, affected behavior and consumers, and meaningful decisions or preserved guarantees. Verify consequential claims against the available sources. Separate implemented behavior, proposed work, observed results, and expected outcomes. Do not invent measurements, commands, issue references, screenshots, alternatives, or completed checks.
+Establish what changes, why it is needed, affected behavior and consumers, and meaningful decisions or preserved guarantees. Verify consequential claims against the available sources, then select those needed to understand the purpose, specific behavior, rationale, impact, compatibility, or requested verification. Factual presence in the diff is not sufficient reason to include something. Separate implemented behavior, proposed work, observed results, and expected outcomes. Do not invent measurements, commands, issue references, screenshots, alternatives, or completed checks.
 
 Describe the branch's resulting state rather than narrating its revisions. Retain relevant rationale from prior discussion without turning the description into a response history. Link related work where useful; use closing keywords only when the PR actually resolves the linked issue under the project's conventions.
 
@@ -37,9 +37,9 @@ If there is no template, choose the smallest structure that explains the purpose
 
 ## Preserve useful detail; remove defensive filler
 
-Scale explanation to the change, not a word count. A small correction may need a paragraph; a contract change may need before/after usage, compatibility, and migration guidance. Preserve conditions, technical mechanisms, tradeoffs, or unchanged behavior that affect review. Include examples, measurements, visual evidence, or a reading order when they reduce reconstruction work.
+Scale explanation to the change, not a word count. A small correction may need a paragraph; a contract change may need before/after usage, compatibility, and migration guidance. Preserve conditions, technical mechanisms, tradeoffs, or unchanged behavior that affect review. Include examples, measurements, visual evidence, or a reading order when they reduce reconstruction work. Removing irrelevant material must not reduce substantive changes to a vague one-line summary.
 
-State supported claims directly. Do not invent a broader claim merely to deny it, or append qualifications against interpretations the description has not invited. Include a limitation when it changes the meaning of an actual claim or a review decision. Do not add routine assurances, investigation-status notices, or an inventory of unavailable information. Remove repetition and process narration without cutting substantive explanations.
+State supported claims directly. Do not invent a broader claim merely to deny it, or append qualifications against interpretations the description has not invited. Include a limitation when it changes the meaning of an actual claim or a review decision. Routine good-practice, compliance, and process announcements are not distinctive change content, even when newly added to a policy or instruction file. For a genuine policy or contract change, explain the concrete changed requirement and its effect on affected work or consumers, not declarations of adherence. Remove repetition and process narration without cutting substantive explanations.
 
 Source bookkeeping is not automatically reviewer-facing content. Omit routine notices that no execution record, measurement, attachment, or linked issue was supplied unless a project question requires that answer or the absence changes a concrete review decision. Clearing an unsupported completion claim does not require adding a status footer.
 
