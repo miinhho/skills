@@ -1,0 +1,13 @@
+# OMP context replacement
+
+Use only when `context_notes`, `new_context`, `read`, and `grep` are available and the protocol has selected a safe work boundary. Do not change user settings. Do not ask the CLI to reset its parent session.
+
+1. Read existing `context_notes`. Reconcile unrelated open requests before replacing the notebook; do not discard them.
+2. Save the latest full state through the bundled CLI with explicit workspace, work ID, expected snapshot revision and any store override. Require its successful path/revision acknowledgement. A failed save or an older saved state blocks replacement.
+3. Load `--view current` from that saved state. Prepare a forward brief containing the original request with current corrections and withdrawal decisions, constraints, all open obligations, current Phase/Task, next action, relevant proof/retrieval pointers, the saved path/revision, the absolute path to reload this skill, and the exact current-view CLI command, including workspace, work ID and store override. Keep unrelated open requests from step 1. Do not use a path-only brief.
+4. Fit the brief within **16384 UTF-8 bytes**, not characters. Move bulky evidence to accessible storage and retain retrieval pointers; do not remove requirements to fit. If the core cannot fit, stop replacement and retain the full saved state.
+5. Write the brief through `context_notes`; require a successful acknowledgement before calling `new_context`. If writing fails, do not request replacement.
+6. Call `new_context` once. Its acknowledgement queues the boundary; it does not prove that replacement committed. A short session can remain unchanged when the host retains its recent history. Do not repeat the request merely because no boundary is yet observed, force a clear, or silently change retention settings. Continue from the saved state if replacement is not committed. Recent messages can remain available, so replacement is not a promise of an empty context or token savings.
+7. After the host actually commits the boundary, read the notes, reload the skill and exact current-view command, inspect next-action-relevant volatile files, and continue execution. Confirm replacement only from the committed boundary and subsequent continuation, not from the request alone. If completion cannot be observed, report only “saved; replacement requested.”
+
+Recover omitted original material only when needed through `history://current/full` on the same branch/session. The notebook is a brief, not the full state store or a guarantee that another session can recover private history. Never replace missing requirements with an assumption that history will supply them later.

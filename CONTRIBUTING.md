@@ -10,6 +10,7 @@ Each skill lives in `skills/<skill-name>/`. Keep its entry point at `SKILL.md` a
 | --- | --- |
 | `SKILL.md` | The skill's trigger, task method, boundaries, and expected result. |
 | `references/` | Supporting guidance linked from `SKILL.md`, when needed. |
+| `scripts/` | Executable helpers shipped with the skill; keep source and build instructions in the owning tool when generated. |
 | `evals/evals.json` | Evaluation prompts, expected outcomes, assertions, and declared input files. |
 | `evals/fixtures/` | Input files for evaluation cases that need them. |
 
@@ -29,6 +30,8 @@ Read the current skill and its references before editing. Keep its responsibilit
 Use the [skill catalog](README.md#available-skills) to find the relevant entry point. For example, [compose-agents-md](skills/compose-agents-md/SKILL.md) owns rule-fragment selection and adaptation. Its fragment links remain there. The issue and PR authoring skills own their writing references and review checklists.
 
 Keep the README focused on discovery and first use. Update its catalog when a skill's purpose or entry path changes. Keep task-specific methods in their owning skill, not in this guide.
+
+The bundled context memo is developed under [`tools/context-memo`](tools/context-memo/README.md). Use its locked dependencies, strict TypeScript checks, tsup single-file build, and domain/CLI/storage tests after source changes. Ship the generated `scripts/context-memo.cjs`; installed skills must not depend on development source, package metadata or adjacent `node_modules`.
 
 ## Evaluation format
 
