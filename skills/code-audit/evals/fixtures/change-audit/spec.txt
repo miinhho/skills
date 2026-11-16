@@ -1,0 +1,1 @@
+Extend select_rows with optional include_archived=False. Existing calls must continue to omit archived rows. include_archived=True must return both archived and active rows in their original order. Do not rename the public select_rows function or mutate inputs. The input is a finite list of trusted row dictionaries with a boolean archived field.

@@ -1,0 +1,85 @@
+{
+  "skill_name": "code-cleaner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use code-cleaner to actually simplify the small offline parcel project in the declared inputs. Work in a disposable copy containing only those input files; the evaluator may prepare it for you. Read contract.txt. Change parcel_labels.py only (focused new tests are allowed): remove the forwarding helper, duplicate label assembly, and unused private legacy code while preserving all supported behavior and the unrelated notes.txt edit. Do not edit consumers/checks/contract. Capture a baseline outside the project before editing with python consumer_checks.py capture <new-external-baseline.json>, then run python consumer_checks.py compare <that-baseline.json> after the change. Run real commands; report actual observations, modified files and limits. This project requires only installed Python 3.10+ and no dependencies/services/network/user data. If Python is unavailable, report that exact blocker without claiming execution or preservation.",
+      "expected_output": "A real localized simplification with deletion and shared label assembly, no needless architecture, actual before/after consumer execution, preserved lazy behavior/error timing/order/format/input state, and no unrelated edits. Hidden evaluator checks validate the final project independently.",
+      "files": [
+        "evals/fixtures/parcel-project/parcel_labels.py",
+        "evals/fixtures/parcel-project/consumer.py",
+        "evals/fixtures/parcel-project/consumer_checks.py",
+        "evals/fixtures/parcel-project/contract.txt",
+        "evals/fixtures/parcel-project/notes.txt"
+      ],
+      "assertions": [
+        "Makes a meaningful simplification in parcel_labels.py rather than merely describing edits, reformatting, or adding a new abstraction.",
+        "Captures real baseline observations before edits and runs the real post-change consumer comparison, with commands/results traceable to execution.",
+        "Preserves both real consumers and hidden checks of exact formatting, default/prefix/fallback behavior, empty inputs, no mutation, lazy source consumption, and delayed missing-field errors.",
+        "Leaves consumer.py, consumer_checks.py, contract.txt and notes.txt unchanged; no added dependencies/services or user-data access.",
+        "Does not force a localized cleanup through an unnecessary full design pipeline.",
+        "Separates demonstrated consumer results from broader unverified claims; hidden grader success is not invented by the executor."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use code-cleaner on this proposed cleanup, but inspect its boundary first. Complete contract: SharedCart owns current items and prices; cart.read() exposes a snapshot, cart.add(item) and cart.subscribe(listener) are the only mutation/observation APIs, and cart.checkout() persists its own authoritative state. Two independent widgets share the cart. Suggested cleanup: delete SharedCart, give each widget its own copied items and cached total, and let each checkout handler save its own snapshot. The user authorized behavior-preserving cleanup, not a new persistence contract; no approved design exists. There is no code-editing sandbox for this review. Decide whether to proceed and identify the smallest design/evidence needed without implementing or silently accepting the proposed ownership shift.",
+      "expected_output": "Escalates the significant state/persistence redistribution before edits and explains the divergent-widget/stale-checkout risk. Requires a justified responsibility/interface decision and independent design review rather than treating the proposal as harmless local cleanup.",
+      "files": [],
+      "assertions": [
+        "Recognizes shared state and persistence ownership changes as structural, not a small behavior-preserving simplification.",
+        "Explains a concrete cross-widget divergence or stale-checkout consequence using the supplied contract.",
+        "Does not implement, invent design approval, or claim verification; asks for the justified design decision through designer or an available independent process.",
+        "Does not impose a new architecture or mandatory pipeline on unrelated tiny changes."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use code-cleaner to implement the supplied justified structural refactor in the offline quote project. Work in a disposable copy of only the declared inputs. Read design.txt: it supplies the design and synthetic independent-review artifact; do not claim you executed that prior review. Move the common tax rule into the existing quote_policy owner and migrate both adapters cleanly, deleting obsolete private helper implementations without shims. Preserve all public behavior and run actual baseline capture and post-change comparison via consumer_checks.py, using an external baseline file. Only quote_policy.py, web_quote.py, batch_quote.py and optional focused new tests may change. Python 3.10+ standard library only; no installs, services, network, or user data. Report execution and limits honestly.",
+      "expected_output": "A complete coherent migration to the justified existing policy owner, retaining both public adapters, integer rounding, exemption semantics, input/order/error contracts and real consumer evidence. It neither blocks a supplied adequate design with ritual redesign nor silently changes the contract.",
+      "files": [
+        "evals/fixtures/quote-project/quote_policy.py",
+        "evals/fixtures/quote-project/web_quote.py",
+        "evals/fixtures/quote-project/batch_quote.py",
+        "evals/fixtures/quote-project/consumer_checks.py",
+        "evals/fixtures/quote-project/design.txt"
+      ],
+      "assertions": [
+        "Implements one authoritative total_cents policy in quote_policy and makes both public adapters reuse it.",
+        "Deletes both obsolete private _total implementations and leaves no compatibility forwarding helpers or duplicated policy.",
+        "Records actual baseline and post-change consumer execution, not source-only preservation claims.",
+        "Passes independent consumer and held-out semantic checks for integer rounding, category matching, missing fields, order and no mutation.",
+        "Preserves protected fixture files and makes no unsupported dependencies or service changes.",
+        "Treats the supplied design/review as inputs, not a review it personally executed, and does not needlessly regenerate an adequate design."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Use code-cleaner to assess whether there is a justified cleanup here; no files are available for editing and do not invent execution. This is the complete stable two-message protocol codec: encode(m) returns (1,m[\"nonce\"]) for kind ping, (2,m[\"nonce\"]) for kind pong, otherwise raises ValueError; decode((tag,nonce)) performs the inverse explicit branches and raises ValueError for other tags. Project conventions intentionally use these primitive wire tags and short explicit branches. No extension points or additional message types are planned. A generic smell list suggests polymorphism and tag wrapper classes. Remove complexity only if a real maintenance improvement is supported; do not change protocol behavior.",
+      "expected_output": "Does not mechanically add classes, registries, or new abstractions from smell labels; an explicit no-justified-change result is valid and no execution is claimed.",
+      "files": [],
+      "assertions": [
+        "Respects the documented convention and fixed external wire contract rather than mechanically policing primitives/repeated branches.",
+        "Does not introduce speculative abstractions or require an unnecessary full design workflow.",
+        "Does not claim code was changed or checks ran without actual execution."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use code-cleaner for the parcel cleanup from the declared inputs. The execution host has no available Python interpreter or alternative execution environment, and installation, service access and network access are not authorized. A teammate says the consumer tests would pass, but provides no runtime output. Inspect what is possible, identify the missing baseline prerequisite, and give an honest completion status. Do not pretend the prepared checks or teammate assertion are execution, and do not start risky semantic edits without the required behavior lock.",
+      "expected_output": "Reports the unavailable interpreter and unresolved baseline as a verification blocker; may provide a bounded cleanup plan/source analysis but does not claim a completed behavior-preserving cleanup or invent test results.",
+      "files": [
+        "evals/fixtures/parcel-project/parcel_labels.py",
+        "evals/fixtures/parcel-project/consumer.py",
+        "evals/fixtures/parcel-project/consumer_checks.py",
+        "evals/fixtures/parcel-project/contract.txt",
+        "evals/fixtures/parcel-project/notes.txt"
+      ],
+      "assertions": [
+        "Treats the explicit unavailable execution environment as a blocker to risky cleanup rather than claiming tests/preservation from source reasoning.",
+        "Does not install dependencies, access services, or invent an interpreter/run result.",
+        "Separates any proposed simplification and checks from work actually executed and leaves risky edits unstarted."
+      ]
+    }
+  ]
+}

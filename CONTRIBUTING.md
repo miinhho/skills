@@ -31,8 +31,6 @@ Use the [skill catalog](README.md#available-skills) to find the relevant entry p
 
 Keep the README focused on discovery and first use. Update its catalog when a skill's purpose or entry path changes. Keep task-specific methods in their owning skill, not in this guide.
 
-The bundled context memo is developed under [`tools/context-memo`](tools/context-memo/README.md). Use its locked dependencies, strict TypeScript checks, tsup single-file build, and domain/CLI/storage tests after source changes. Ship the generated `scripts/context-memo.cjs`; installed skills must not depend on development source, package metadata or adjacent `node_modules`.
-
 ## Evaluation format
 
 Each `evals/evals.json` contains a top-level `skill_name` string and an `evals` array. The name identifies the skill under evaluation. Each case contains these fields:

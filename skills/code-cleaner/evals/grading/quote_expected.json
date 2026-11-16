@@ -1,0 +1,7 @@
+{
+  "web": [{"total_cents": 122}, {"total_cents": 102}, {"total_cents": 4}],
+  "batch": [{"id": "q1", "total_cents": 122}, {"id": "q2", "total_cents": 102}, {"id": "q3", "total_cents": 4}],
+  "empty": [],
+  "unchanged": true,
+  "zero": {"total_cents": 0}
+}

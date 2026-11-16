@@ -7,11 +7,12 @@ Task-focused skills for designing changes, checking evidence, managing ongoing w
 | Skill | Use it when you need to |
 | --- | --- |
 | [compose-agents-md](skills/compose-agents-md/SKILL.md) | Set repository working agreements in `AGENTS.md` without overwriting local guidance. |
-| [module-design](skills/module-design/SKILL.md) | Define responsibilities, interfaces, and acceptance evidence before planning implementation. |
-| [design-intent-review](skills/design-intent-review/SKILL.md) | Independently review whether a design serves its goal and respects module boundaries. |
+| [code-designer](skills/code-designer/SKILL.md) | Design responsibilities, interfaces, and acceptance evidence, then independently review the design. |
+| [code-audit](skills/code-audit/SKILL.md) | Diagnose existing code or a change against standards, requirements, and maintenance risks without editing it. |
+| [code-cleaner](skills/code-cleaner/SKILL.md) | Perform scoped, behavior-preserving cleanup with appropriate before/after verification. |
 | [evidence-driven-poc](skills/evidence-driven-poc/SKILL.md) | Run a focused experiment to resolve a consequential assumption. |
 | [e2e-verify](skills/e2e-verify/SKILL.md) | Verify a workflow or assess whether end-to-end tests prove their claims. |
-| [context-memo](skills/context-memo/SKILL.md) | Maintain current work state across phases, requirement changes, interruptions, or fresh contexts. |
+| [context-memo](skills/context-memo/SKILL.md) | Maintain ongoing work in OMP across phases, requirement changes, interruptions, or fresh contexts. |
 | [issue-authoring](skills/issue-authoring/SKILL.md) | Prepare an actionable GitHub or Jira issue before publication. |
 | [pr-authoring](skills/pr-authoring/SKILL.md) | Write or review a pull request description against the actual change and requirements. |
 
@@ -23,14 +24,10 @@ Task-focused skills for designing changes, checking evidence, managing ongoing w
 
 For example, with this collection accessible to the agent:
 
-> Use `skills/module-design/SKILL.md` to design resumable imports for the inventory project. Preserve the existing input format and ground the design in the current implementation.
+> Use `skills/code-designer/SKILL.md` to design resumable imports for the inventory project. Preserve the existing input format and ground the design in the current implementation.
 
-The instructions are not tied to a single agent runtime. Check the selected skill's compatibility notes before using features that require tools or host integration.
-
-## Context memo CLI
-
-`context-memo` includes a [Node.js CLI](tools/context-memo/README.md) for saving and loading personal work state. Its bundled executable needs no npm installation. Other skills do not require this tool.
+Check each skill's compatibility notes before use. Some skills require a specific runtime; context-memo uses OMP's notebook and context-replacement tools.
 
 ## Contribute
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for skill layout, evaluation data, and contribution guidance. Scoped `AGENTS.md` files cover [skill authoring](skills/AGENTS.md) and [context memo development](tools/context-memo/AGENTS.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for skill layout, evaluation data, and contribution guidance. Scoped [AGENTS.md](skills/AGENTS.md) covers skill authoring.

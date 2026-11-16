@@ -19,9 +19,11 @@ Do not carry a template or house style over from another repository. Keep requir
 
 Inspect the full intended change against its base, not only the last commit. Read relevant code, tests, documentation, linked requirements, and decisions. Commit messages and the existing PR body are clues, not substitutes for the current diff. When updating a description, read the existing text first and identify what has actually changed.
 
-Establish what changes, why it is needed, affected behavior and consumers, and meaningful decisions or preserved guarantees. Verify consequential claims against the available sources, then select those needed to understand the purpose, specific behavior, rationale, impact, compatibility, or requested verification. Factual presence in the diff is not sufficient reason to include something. Separate implemented behavior, proposed work, observed results, and expected outcomes. Do not invent measurements, commands, issue references, screenshots, alternatives, or completed checks.
+Establish what changes, why it is needed, affected behavior and consumers, and meaningful decisions or preserved guarantees. Use the sources to derive a supported explanation: identify the changed behavior, the mechanism that produces it, its value to affected users, and any boundary that changes that value or compatibility. Select evidence according to the claim or template answer it supports; checking a fact does not make the fact itself publication content. Separate implemented behavior, proposed work, observed results, and expected outcomes. Do not invent measurements, commands, issue references, screenshots, alternatives, or completed checks.
 
 Describe the branch's resulting state rather than narrating its revisions. Retain relevant rationale from prior discussion without turning the description into a response history. Link related work where useful; use closing keywords only when the PR actually resolves the linked issue under the project's conventions.
+
+For experimental work, explain the concrete design outcome the implementation demonstrates and why that outcome matters. Derive it from the implemented path and its boundaries, not the number of checks or the author's investigation. A passing test can support a behavior claim without becoming the summary; it cannot establish an unimplemented consumer, integration, or production capability.
 
 ## Answer the questions actually asked
 
@@ -47,7 +49,7 @@ Provide enough verification detail for the intended reader. An environment sente
 
 ## Review and deliver the requested artifact
 
-Apply [review-checklist.md](references/review-checklist.md) before returning the result. For a focused revision, preserve unaffected content and change only the requested part and dependent wording. For a refresh, align the description with the current whole change rather than appending a revision log.
+Apply [review-checklist.md](references/review-checklist.md) before returning the result. For a focused revision, preserve unaffected content and change only the requested part and dependent wording. For a refresh, align the description with the current whole change rather than appending a revision log. Apply a content correction to every affected part of the artifact, including tables, checklist labels, and annotations; preserve required fields and supported completion states. Replace displaced explanation with supported change-specific prose, not merely deletion.
 
 Return a usable title and body for a draft or rewrite. For a review, give concrete findings tied to the source and the smallest useful corrections; do not replace a requested review with an unsolicited full rewrite. Respect a requested file or response format.
 

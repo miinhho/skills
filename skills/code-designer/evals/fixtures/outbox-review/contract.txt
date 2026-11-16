@@ -1,0 +1,8 @@
+Notification delivery contract
+
+The worker runs one attempt at a time. Process crashes, multiple workers, and durable storage are outside this change.
+Outbox.next_message() observes the oldest pending message without removing it.
+Outbox.acknowledge(id) removes that message after the delivery callback returns successfully.
+If the callback raises ConnectionError, the message must remain pending for the next attempt.
+A successful message must no longer be pending and must not be delivered by the next attempt.
+The delivery callback may raise ConnectionError before accepting anything. This is a supported retry path, not an invalid caller.

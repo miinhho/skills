@@ -23,6 +23,26 @@ For verification instructions, include the working directory, environment, comma
 
 A question that asks only for instructions should not acquire a historical-results paragraph. If the template asks for both, distinguish the two. Missing records need an answer in a required results field, not a routine notice appended to proposed verification or rollout instructions. A supplied source note need not appear in the draft.
 
+## Turn evidence into an explanation
+
+Start with the reviewer's question, not the volume of source material. For each consequential claim, connect the changed behavior to its implementation and purpose, then retain the conditions or compatibility limits that affect it. Use execution records to establish what was observed; use code and contract evidence to establish what is implemented. Neither the presence of a test nor a passing run alone supports a broader capability.
+
+Choose where the derived information belongs:
+
+- **Purpose:** explain the problem, resulting change, and value. Technical evidence supplies the reason this explanation is justified; it need not appear as a record of investigation.
+- **Instructions:** give reproducible actions and expected observations. A supplied run can help identify the relevant command without requiring publication of its historical result.
+- **Results:** report the actual execution and scope when requested, or when the observation is needed to assess a specific claim. Keep a useful comparison table when it helps evaluate that claim; a table of author activities is not a substitute for explaining the change.
+
+For a prototype, name the implemented design outcome and its use within the experiment. Preserve a boundary when omitting it would imply a capability the implementation does not have. This lets the reader assess the experiment without reconstructing its development history.
+
+### Contrasting content choices
+
+These independent synthetic examples illustrate selection, not required wording or a fixed format.
+
+- **Experimental layout:** A plain-text preview now consumes line breaks calculated by a render-independent wrapping function; HTML export still uses its existing layout. “We tried two approaches and the wrapping checks passed” reports activity. “Calculate the preview's line breaks separately from drawing so wrapping can be checked without a rendering surface” explains the supported design outcome. It does not claim HTML export uses that path.
+- **Purpose versus instructions:** A duration formatter now divides integer milliseconds into minutes and seconds, so 65,000 becomes `01:05` rather than `00:65`. Given a recorded passing run, a purpose answer explains the correction; an instructions answer can say “Run the duration-format checks and confirm 65,000 renders as `01:05`.” “The checks passed” answers neither question.
+- **Requested results:** If the field instead asks “What verification was performed?”, retain the recorded command and observed outcome, accurately scoped to that run. An actual targeted result belongs here; replacing it with only future instructions loses required evidence.
+
 ## Choose detail according to the change
 
 ### Focused correction
@@ -53,7 +73,7 @@ Qualify the claim itself when needed. Do not manufacture an expansive interpreta
 
 Keep a real limitation when it affects the stated benefit, compatibility, measurement, or use. Do not add a separate limitations section by habit. Likewise, do not hide a relevant constraint merely to sound confident or fit a short paragraph.
 
-When revising, remove the irrelevant sentence rather than summarizing away the neighboring rationale, examples, or guarantees. Replace a content-poor description with the missing change-specific explanation, not just a shorter generic claim. Avoid self-evaluation adjectives, repetitive assurances, progress reports, and descriptions of how the draft was produced; retain concrete constraints that explain a real requirement, limitation, or compatibility decision.
+When revising, remove the irrelevant sentence rather than summarizing away the neighboring rationale, examples, or guarantees. Replace a content-poor description with the missing change-specific explanation, not just a shorter generic claim. Apply the correction by meaning across the whole affected artifact: an execution recap removed from a summary may still remain in a table or checklist annotation. Preserve the template's required items, supported checked states, and requested results while correcting those dependent passages. Avoid self-evaluation adjectives, repetitive assurances, progress reports, and descriptions of how the draft was produced; retain concrete constraints that explain a real requirement, limitation, or compatibility decision.
 
 ## Public references and their scope
 

@@ -1,90 +1,67 @@
 ---
 name: context-memo
-description: Maintain the current state of ongoing work across phases, requirement changes, pauses, and fresh contexts. Use when starting or resuming multi-step work that needs durable progress, when the user changes direction or interrupts execution, and when context pressure or executor changes threaten continuity—even without an explicit checkpoint request.
-compatibility: Optional bundled CLI requires Node ^22.22.2 || ^24.15.0 || >=26.0.0 and command/file tools. Context replacement requires a supported host adapter; persistence does not require one.
+description: Maintain ongoing work in OMP across phases, requirement changes, pauses, and fresh contexts. Use when starting or resuming multi-step work, when the user changes direction or interrupts execution, and when context pressure threatens continuity—even without an explicit checkpoint request.
+compatibility: OMP with context_notes, new_context, read, and grep.
 ---
 
 # Context memo
 
-Keep enough current state to perform the next action without reconstructing the conversation. The memo supports execution; it is not a turn-by-turn report, a replacement for the user's instructions, or new authorization.
+Keep enough current state to perform the next action without reconstructing the conversation. Use OMP's `context_notes` for the memo and `new_context` for context replacement. The memo supports execution; it does not replace the user's instructions or grant new authorization.
 
-Keep the method proportional to the work. A small task can have one Phase. Reconcile direction at meaningful work boundaries rather than reclassifying every turn or rereading the entire Spec before each action.
+Keep the method proportional. A small task can have one Phase and a short memo. A context window is not a Phase.
 
 ## Start or resume work
 
-1. Read the binding request and current corrections. Establish the **Spec**: original request, constraints, individually identified requirements, authoritative sources, and a revision. Historical notes cannot supply missing authority.
-2. Select a stable `workId` matching `[a-z0-9][a-z0-9_-]{0,79}`. Resume the matching work, not merely the newest record. If identity is ambiguous, list records and reconcile their state with the request.
-3. For existing work, load the current view before acting. Retrieve full state or supporting evidence as needed and inspect volatile files relevant to the next action. Do not reuse stale edit anchors, assume ownership of old jobs, or rerun checks merely to rediscover recorded results.
-4. Define the **Scope**, the goal and boundary of this work. Divide it into **Phases** where useful, with requirement coverage, dependencies, and observable completion conditions. Scope is not a Phase; neither is a context window.
-5. Elaborate executable **Tasks** just in time for the current Phase. Give each requirement coverage, dependencies, and observable completion conditions. Keep future Phases at goal/dependency/completion-condition level instead of expanding a speculative task tree. Retain previously recorded unfinished Tasks outside the current Phase.
+1. Read the binding request and current corrections. Establish the **Spec**: request, constraints, identifiable requirements, and authoritative sources. Historical notes cannot supply missing authority.
+2. Read `context_notes` and identify the workspace and work being continued. Preserve unrelated work in the shared notebook. Use ordinary text or Markdown; no prescribed filename, schema, or revision counter is needed.
+3. Reconcile the memo with current instructions. Inspect next-action-relevant volatile files; do not reuse stale edit anchors, assume ownership of old jobs, or rerun checks merely to rediscover recorded results.
+4. Define the **Scope**, the goal and boundary of this work. Divide it into useful **Phases**, with requirement coverage, dependencies, and observable completion conditions.
+5. Elaborate executable **Tasks** just in time for the current Phase. Keep future Phases at goal, dependency, and completion-condition level, while retaining unfinished work outside the current Phase.
 
-Select the next eligible Phase and Task from that state, then do the work under the user's current authorization.
+Select the next eligible Phase and Task from that state and act under the user's current authorization. Check prerequisites rather than treating a list's order or an empty current checklist as proof that all work is complete.
+
+## Keep current state, not a transcript
+
+Maintain what a fresh executor needs:
+
+- Work identity and workspace; the binding request, current corrections, constraints, sources, and explicit withdrawals.
+- Scope, Phase goals, requirement coverage, dependencies, completion conditions, and all pending obligations.
+- Current Task, completed results with evidence, unresolved blockers, and assumptions that still need checking.
+- Decisions and failed approaches that affect the next action, with retrieval pointers for bulky supporting material.
+- The next concrete action, including any authorization or prerequisite needed before it can start.
+
+Use ordinary text or Markdown. Update the current contract instead of leaving contradictory instructions in an append-only history. Keep useful reasons and evidence, not a turn-by-turn log or a second copy of every tool result.
 
 ## Advance from observed results
 
 Record actual changes, checks, and outcomes separately from assumptions. A check run before an edit does not verify that edit.
 
-- Mark a Task `done` only with evidence satisfying its completion conditions.
-- Mark a requirement `met` only with supporting evidence. Keep open requirements visible across Phases.
-- Before marking a Phase `done`, check its requirement coverage and unfinished Tasks, not just checked boxes.
-- Both `done` and `cancelled` Phases must have no unfinished Tasks. Cancel affected Tasks explicitly with reasons, or move retained work to an open Phase so the current view cannot hide it.
+- **Task or Phase completion:** mark complete only with evidence satisfying its completion conditions. Check requirement coverage and unfinished work before completing a Phase or Scope; Task completion alone does not prove every requirement.
+- **Cancellation:** record the withdrawn obligation and reason. Explicitly cancel affected unfinished Tasks, or retain them under an open Phase, so completing their former Phase cannot hide them.
+- **Failed assumption or blocker:** record the failure, affected work, and next supported action. Do not advance dependent work as though a prerequisite succeeded.
+- **User amendment:** replace outdated requirement text and completion conditions, and retain the reason for the change. Identify affected work and evidence needing review; reopen completed work whose result no longer satisfies the contract. Preserve unaffected proof and pending obligations. Carry withdrawals forward so the original request cannot revive removed scope.
+- **Pause or stop:** stop execution and owned jobs immediately. If persistence is allowed, record paused work and its resumption action, not completion. An amendment does not authorize resumption. A prohibition on further tools forbids saving too; do not promise capture after a hard kill.
+- **Unrelated detour:** retain the original work and its paused state under its existing identity. Give the detour its own state rather than overwriting the original Spec.
 
-Refresh and persist forward state before the next substantive action when any of these changes occurs:
+Refresh the memo at meaningful work boundaries before the next substantive action, not after every field or conversational turn.
 
-- **Task result or Phase completion:** record evidence and the next action; select or plan the next eligible work.
-- **Failed assumption or blocker:** record the failure, affected work, and next supported action. Do not advance dependent work as though it succeeded.
-- **User amendment:** revise the Spec first. Mark only affected requirements, Phases, and Tasks `needs-review`; preserve unaffected completed results and evidence. Retain pending obligations unless explicitly withdrawn or cancelled. Carry withdrawal decisions forward so the original request cannot revive removed scope. A progress-only update does not change the Spec revision.
-- **Pause or stop:** stop execution and owned jobs immediately. Record `paused`, not `done`, and a resumption action only if persistence is permitted. A prohibition on further tool use forbids saving too. Do not promise capture after a hard kill.
-- **Unrelated detour:** leave the original work paused under its existing `workId` and select another identity for the detour. Do not overwrite the original Spec with an unrelated request.
+## Save in the OMP notebook
 
-## Persist the complete state
+Read the latest `context_notes` before replacing it and reconcile other writers' changes. Keep the current memo directly in the notebook; a separate state file is not required.
 
-Honor an explicit user destination and its safe update mechanism. Otherwise use the bundled CLI. Resolve the absolute `scripts/context-memo.cjs` path from this skill's installed directory, not from the target repository or current directory. The single executable needs no npm installation or adjacent dependencies.
+The notebook holds **16384 UTF-8 bytes**, not characters. Keep bulky evidence in accessible files and retain exact retrieval pointers. If essential state cannot fit and no authorized file destination is available, continue without replacing context; do not drop requirements to fit.
 
-Pass the target workspace and work identity explicitly:
+Require a successful `context_notes` write before treating an update as saved. If saving fails or the user forbids further tools, retain or provide compact forward state as unsaved. Do not use an older memo to justify a context replacement.
 
-```sh
-CLI="/absolute/path/to/context-memo/scripts/context-memo.cjs"
-WORKSPACE="/absolute/path/to/checkout"
+## Replace the OMP context
 
-node "$CLI" list --workspace "$WORKSPACE"
-node "$CLI" load --work catalog --view current --workspace "$WORKSPACE"
-node "$CLI" load --work catalog --view full --workspace "$WORKSPACE"
-node "$CLI" save --work catalog --expect SNAPSHOT_SHA256 --file "/absolute/state.json" --workspace "$WORKSPACE"
-```
+Persistence and replacement are separate. Do not reset automatically at every Phase. Replace when accumulated history is mostly irrelevant or context pressure threatens continuity, after a safe work boundary and with no active write or owned operation that would be interrupted.
 
-The private default store is outside the checkout. For an intentional override, append `--store "/absolute/private-store"` to every command, or use `CONTEXT_MEMO_HOME`.
+1. Reconcile the notebook with the latest request. Include work identity and workspace, current contract and withdrawals, all pending obligations, current Phase/Task, observed results and proof pointers, the next action, and the absolute path to reload this skill. A path-only brief is insufficient.
+2. Save any referenced state first, then write the current memo through `context_notes`. Require successful acknowledgements for all writes. Failed or partial persistence blocks replacement.
+3. Within the user's ongoing approval of this protocol, call `new_context` once after saving. Its acknowledgement queues a boundary; it does not prove that replacement committed. Do not repeat the request merely because no boundary is observed, force a clear, or change retention settings.
+4. After OMP actually commits the boundary, read `context_notes`, reload this skill and needed evidence with `read` or `grep`, inspect relevant volatile files, and perform the next supported action. Do not substitute another handoff report for execution.
 
-### Prepare a replacement
+Confirm replacement only from an observed committed boundary and subsequent continuation. Otherwise report only “saved; replacement requested.” Recent messages can remain available; replacement does not promise an empty context or token savings.
 
-- Use [the v1 state example](assets/state.example.json) for the field shape. Keep all fields, using empty arrays or null pointers where appropriate.
-- `load --view full` returns an envelope; edit its `state`, not the envelope. The current view is selective and cannot replace the complete stored document.
-- Keep IDs and references consistent and dependency graphs acyclic. Current pointers identify active, paused, blocked, or reviewed work. Evidence names an observation or accessible artifact, not a promised check.
-- Change `spec.revision` when the binding contract changes; its value need not be a hash.
-
-### Publish without overwriting another writer
-
-Read and reconcile existing state before replacing it. Use the latest returned snapshot `revision` as `--expect`. This SHA-256 identifies the exact saved bytes; it is not `spec.revision`.
-
-Create a new record with `--expect missing` only after confirming absence through `load` exit 2 or `list`. Supply UTF-8 JSON through `--file`, or through stdin when omitting that flag.
-
-On conflict (exit 3), reload and reconcile before saving with the new revision. On busy (exit 4), do not remove another writer's lock. Other failures do not authorize clobbering or silent defaults.
-
-Require the save acknowledgement with path and revision before treating an update as persisted. Keep prepared state if saving fails; an outdated save cannot support a context transition.
-
-### When persistence is unavailable
-
-If Node or command tools are unavailable, use an authorized file destination and respect its actual limits. With no writable destination or tools, provide compact forward state inline: work identity, the binding Spec with an explicit revision, pending work, relevant proof, and the next action. Identify it as unsaved; do not claim persistence or a context reset.
-
-## Replace context only when useful and supported
-
-Context replacement is separate from state management. Do not reset automatically at every Phase. When accumulated history is mostly irrelevant or context pressure threatens continuity, finish a safe work boundary and save current state first. Never interrupt a write or owned operation to swap.
-
-Within the user's ongoing approval of this protocol, choose replacement at that boundary without asking for a manual checkpoint each time. Keep host-specific operations in an adapter:
-
-- If OMP exposes `context_notes`, `new_context`, `read`, and `grep`, read [the OMP adapter](references/omp.md) and follow it.
-- Otherwise use a documented adapter supplied by the host. If none is available, continue ordinary state management and report that no context replacement occurred.
-
-The CLI cannot reset its parent session. A saved note, queued request, or acknowledgement is not proof that a fresh context is active.
-
-After an actual boundary, read the continuation brief, reload this skill and the current state, inspect next-action-relevant volatile files, and perform the next supported action. Briefly report saved versus unsaved state, transition status, or a blocker where relevant; do not substitute another handoff report for execution.
+Recover omitted original material through `history://current/full` only when needed on the same branch/session. Do not assume another session can recover private history, or use history as a substitute for saving required forward state.

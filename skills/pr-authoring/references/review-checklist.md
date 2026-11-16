@@ -16,6 +16,8 @@ Check the artifact against the actual request, project instructions, and current
 - Are behavior, implementation, coverage added, and executed checks distinguished?
 - Are issue references, commands, measurements, screenshots, and completion claims supported?
 - Are any checkboxes ticked without evidence or unknown answers presented as inapplicable?
+- For each main claim, can the changed behavior, supporting mechanism, and reviewer value be traced to the sources without publishing the author's investigation as the explanation?
+- For an experiment, is the demonstrated design outcome clear and limited to implemented paths, rather than inferred from passing checks or extended to unsupported consumers?
 
 ## Useful depth
 
@@ -29,6 +31,7 @@ Check the artifact against the actual request, project instructions, and current
 - If the question asks how to verify, can the reader identify the necessary actions and expected observations?
 - If it asks what ran, does the answer accurately state the recorded execution and result?
 - If it asks about coverage, does it explain meaningful behavior rather than imply a passing run?
+- Have supplied execution records been selected according to each field's meaning, retaining required results without displacing purpose or instructions? Does a table clarify a relevant claim rather than merely catalog activity?
 - Are steps included only when the workflow needs them, with meaningful order preserved?
 
 ## Reader value and tone
@@ -37,6 +40,7 @@ Check the artifact against the actual request, project instructions, and current
 - Does each qualification affect an actual claim or review decision, without inventing an exaggerated interpretation merely to refute it?
 - Can routine good-practice, compliance, and process announcements be removed, including ones newly written in policy files, while preserving substantive explanations and relevant constraints?
 - For a focused edit, is unaffected content preserved rather than replaced with a summary?
+- After a correction, do all affected paragraphs, tables, and checklist annotations follow it, while required items, supported completion states, and useful technical content remain intact?
 
 ## Artifact and action boundaries
 
