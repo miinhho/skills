@@ -1,0 +1,24 @@
+{
+  "consumer": {
+    "manifest": "#Mira | EXPRESS | 250g\n#Noor | STANDARD | 0g\n#李 | STANDARD | 12g",
+    "empty_manifest": "",
+    "empty_preview": null,
+    "preview": "P: Mira | EXPRESS | 250g",
+    "preview_reads": ["first"],
+    "rows_unchanged": true,
+    "invalid_iterator_created": true,
+    "invalid_iteration_error": {"type": "KeyError", "message": "'recipient'"},
+    "default_prefix": ["Noor | STANDARD | 0g"]
+  },
+  "hidden": {
+    "reads_at_creation": [],
+    "first": "!Zed | STANDARD | -3g",
+    "reads_after_first": ["one"],
+    "second": "! | EXPRESS | 9g",
+    "reads_after_second": ["one", "two"],
+    "exhausted": true,
+    "source_unchanged": true,
+    "missing_service": {"type": "KeyError", "message": "'service'"},
+    "missing_weight": {"type": "KeyError", "message": "'weight_grams'"}
+  }
+}

@@ -7,7 +7,6 @@ This file applies to `skills/`. Follow [CONTRIBUTING.md](../CONTRIBUTING.md) for
 - Read the affected skill's `SKILL.md` and linked references before editing. Preserve its name and entry path unless the task requires a migration.
 - Put the task method in `SKILL.md`; load detailed guidance through linked references. Do not duplicate another skill's method or make unrelated skills mandatory.
 - Keep host-specific behavior in an adapter or compatibility section. Do not assume every agent has OMP tools, browser access, or a particular writable destination.
-- Generated helpers belong to their owning tool. For context memo, edit `../tools/context-memo/`, build there, and ship the resulting single script; do not patch the bundle by hand.
 
 ## Writing
 

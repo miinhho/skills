@@ -1,0 +1,4 @@
+Repository standards for this synthetic capture:
+- Python function and local variable names use snake_case.
+- Inputs here are trusted dictionaries; do not introduce a validation framework.
+- Small explicit numeric range checks are the established convention. A new wrapper type is not required for every integer.

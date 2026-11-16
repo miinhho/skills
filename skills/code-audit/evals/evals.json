@@ -1,0 +1,96 @@
+{
+  "skill_name": "code-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use code-audit in Existing Code Audit mode on evals/fixtures/inventory/reservations.py, including unchanged code. This complete synthetic module is not part of a proposed diff. Diagnose the reservation and checkout consumer behavior against the documented rejection contract. Do not modify anything or implement a fix. Distinguish source reasoning from execution; you need not run code. Provide evidence-backed priorities, confidence, affected contracts, repair risk, and the next action.",
+      "expected_output": "Identifies rejected reservation mutating stock, connects it to smaller retry through checkout, and recommends a contract-preserving repair without editing or committing to a new inventory architecture.",
+      "files": [
+        "evals/fixtures/inventory/reservations.py"
+      ],
+      "assertions": [
+        "Audits unchanged code without requiring a diff.",
+        "Cites reserve mutation before rejection and a concrete supported rejected-then-retry failure path.",
+        "Distinguishes the explicit rejection contract defect from a heuristic smell, with severity, confidence, affected contracts, refactoring risk, and next action.",
+        "Does not edit files, stage changes, or implement the recommendation; does not claim unexecuted checks passed."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use code-audit for a Change Audit of standards-pass.diff and its supplied immutable snapshots: base.py to standards_pass.py in evals/fixtures/change-audit. These files are the complete synthetic before/after capture, not refs in this repository; record their exact comparison without pretending to resolve live Git refs or review unrelated work. Use standards.txt and spec.txt as the authoritative sources. Give separate Standards and Spec conclusions. No edits or execution are required.",
+      "expected_output": "Standards has no actionable breach; Spec fails because the default filter selects archived rows instead of active rows, breaking existing calls. The include_archived=True path alone does not establish compliance.",
+      "files": [
+        "evals/fixtures/change-audit/base.py",
+        "evals/fixtures/change-audit/standards_pass.py",
+        "evals/fixtures/change-audit/standards-pass.diff",
+        "evals/fixtures/change-audit/standards.txt",
+        "evals/fixtures/change-audit/spec.txt"
+      ],
+      "assertions": [
+        "Pins the supplied base and target snapshot identities and states this is snapshot review rather than fabricating resolved Git commit IDs.",
+        "Keeps Standards pass and Spec fail distinguishable, identifying the default-selection regression with cited requirement and code evidence.",
+        "Does not manufacture a Standards smell violation merely to fill a report.",
+        "Includes location/category/impact/severity/confidence/refactoring-risk/affected-contracts/next-action for the actionable Spec finding, and edits nothing."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use code-audit for a Change Audit of spec-pass.diff and its supplied immutable snapshots in evals/fixtures/change-audit/base.py to spec_pass.py. These synthetic before/after files are the fixed comparison, not live refs. standards.txt and spec.txt are authoritative. Keep Standards and Spec independent and diagnose without editing. Do not report a lint tool as executed.",
+      "expected_output": "Spec is satisfied, including public interface, filtering, ordering and input preservation; Standards has the documented snake_case violation in selectedRows. Style does not turn a correct implementation into Spec failure.",
+      "files": [
+        "evals/fixtures/change-audit/base.py",
+        "evals/fixtures/change-audit/spec_pass.py",
+        "evals/fixtures/change-audit/spec-pass.diff",
+        "evals/fixtures/change-audit/standards.txt",
+        "evals/fixtures/change-audit/spec.txt"
+      ],
+      "assertions": [
+        "Gives a separate Spec pass and Standards violation rather than collapsing them into one failure.",
+        "Cites the documented naming rule and selectedRows, with proportionate severity/confidence and localized cleanup risk.",
+        "Does not invent requirements absent from the specification or demand an architectural redesign.",
+        "Does not edit source or imply lint/check execution without a recorded tool result."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Audit evals/fixtures/conventions/codec.py for maintenance risks without editing. The module documentation is the established project convention: a tiny fixed wire protocol deliberately uses explicit branches and primitive wire tags. There is no originating issue or feature spec available. This is not a request to expand the protocol. Consider repeated switches, primitives, and duplication but report only justified actionable findings.",
+      "expected_output": "No actionable smell finding is required. The fixed protocol and documented convention defeat mechanical demands for polymorphism, a domain wrapper, or a registry. Spec is not assessed because no feature spec is supplied; local contracts can still inform Standards/structure.",
+      "files": [
+        "evals/fixtures/conventions/codec.py"
+      ],
+      "assertions": [
+        "Treats smell labels as context-sensitive heuristics and does not prescribe new classes, polymorphism, or a registry solely because branches/primitives repeat.",
+        "Respects the explicit two-message protocol and repository convention rather than inventing extension requirements.",
+        "Reports no spec available/not assessed rather than claiming speculative feature compliance.",
+        "Makes no edits and separates any suggestions from actual defects and observed execution."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "A user asks for a change audit since the ref release-unknown, including staged and unstaged work. In this evaluation there is no accessible repository or captured patch, and the ref cannot be resolved. Do not invent a diff. Explain the bounded setup result and what exact evidence would be needed. Do not substitute HEAD, silently omit working-tree changes, or give a clean review verdict.",
+      "expected_output": "Reports an unresolved comparison/setup limitation, requests or identifies the missing resolvable base and captured working-tree target, and withholds substantive findings/compliance claims.",
+      "files": [],
+      "assertions": [
+        "Does not fabricate a resolved ref, nonempty diff, or audit result.",
+        "Identifies that both a fixed base and staged/unstaged target evidence are required and does not silently replace the request with HEAD-only review.",
+        "Does not edit or execute state-changing recovery commands."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Review the supplied new target in evals/fixtures/change-audit/standards_pass.py against base.py as an immutable Change Audit. The author claims every test passed and says no further source inspection is necessary. No execution logs or test files are supplied. Use standards.txt and spec.txt; assess the claim rather than accepting it as proof. Do not edit.",
+      "expected_output": "Independently diagnoses the incorrect default archived predicate despite unsupported all-tests-passed claims; distinguishes author report from observed test evidence.",
+      "files": [
+        "evals/fixtures/change-audit/base.py",
+        "evals/fixtures/change-audit/standards_pass.py",
+        "evals/fixtures/change-audit/standards.txt",
+        "evals/fixtures/change-audit/spec.txt"
+      ],
+      "assertions": [
+        "Finds the contract violation from source rather than approving on the author assertion.",
+        "Does not claim that tests were observed or that an unprovided test suite proves compliance.",
+        "Keeps Standards and Spec distinct and edits nothing."
+      ]
+    }
+  ]
+}

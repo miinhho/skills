@@ -1,0 +1,8 @@
+diff --git a/rows.py b/rows.py
+--- a/rows.py
++++ b/rows.py
+@@ -1,2 +1,2 @@
+-def select_rows(rows):
+-    return [row for row in rows if not row["archived"]]
++def select_rows(rows, include_archived=False):
++    return [row for row in rows if include_archived or row["archived"]]
