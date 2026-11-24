@@ -1,0 +1,52 @@
+{
+  "skill_name": "writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "다음 자료로 동네 공방을 처음 이용하는 사람에게 보여 줄 예약 안내를 작성해 줘. 바로 게시할 본문만 필요해. 자료: 목공실 예약은 이용 이틀 전 오후 6시까지 받는다. 예약 확인 문자를 받아야 예약이 확정된다. 안전교육을 이수하지 않은 사람은 예약할 수 있어도 장비를 사용할 수 없다. 교육은 매주 토요일 오전 10시이며 별도로 신청해야 한다. 준비물은 발을 덮는 신발이다. 강사의 안내에 따라 장비를 사용한다. 예약 시스템 도입일은 지난 4월 3일이다. 작년 내부 검토 회의는 세 차례였다.",
+      "expected_output": "A self-contained Korean notice that prioritizes booking and first-visit needs, explains booking versus equipment eligibility, retains deadlines and preparation, and omits irrelevant internal chronology.",
+      "files": [],
+      "assertions": [
+        "Preserves the two-days-before 6 pm deadline and confirmation-text requirement.",
+        "Makes clear that a reservation does not replace safety training and training requires separate signup at Saturday 10 am.",
+        "Includes closed footwear and instructor-guided equipment use without inventing a signup channel or price.",
+        "Does not turn internal meetings into reader-facing content or add promotional conclusions."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "아래 메모로 도서관 소식지에 실을 짧은 설명글을 써 줘. 독자는 통계를 공부하지 않은 주민이고, 주제는 '대출이 늘었다는 결과를 어떻게 읽을까'야. 메모: 야간 개방을 시작한 뒤 6주 동안 대출 건수가 이전 6주보다 18% 늘었다. 같은 기간 신간 200권이 들어왔다. 작년 같은 기간과 비교한 자료는 없다. 방문자 수는 집계하지 않았다. 담당자는 야간 개방이 도움이 되었을 것으로 생각하지만 원인을 따로 분석하지 않았다. 용어만 나열하지 말고 이 사례로 설명해 줘.",
+      "expected_output": "An accessible explanation that develops why the observation cannot isolate the cause, without dismissing the observed increase or inventing alternative causal findings.",
+      "files": [],
+      "assertions": [
+        "Accurately reports 18 percent over the two six-week windows and the arrival of 200 new books.",
+        "Explains in ordinary language why concurrent new books and missing comparisons limit attribution to night opening.",
+        "Does not infer increased visitor numbers or establish either change as the proven cause.",
+        "Produces connected explanation rather than a research checklist or unsupported recommendation to expand opening hours."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "동아리 소식지에 넣을 내 짧은 글을 다듬어 줘. 말투와 생각은 그대로 두고, 고칠 필요 없으면 그대로 줘. 원문: 나는 아직 종이 지도가 좋다. 길 찾기가 빨라서가 아니다. 화면을 확대하고 줄이는 대신, 한 번 펼쳐 놓고 주변을 오래 보는 게 좋다. 지난 산책에서는 길을 두 번 잘못 들었다. 그래도 다음번에도 가져갈 생각이다.",
+      "expected_output": "Preserves a coherent personal voice and a meaningful contrast, without adding personality or a lesson.",
+      "files": [],
+      "assertions": [
+        "Preserves the actual preference, its reason, and the two wrong turns without converting them to efficiency claims.",
+        "Retains the meaningful rejection of speed as the reason, whether in the original or an equivalent expression.",
+        "Adds no invented experience, universal moral, promotional claim, or correction commentary.",
+        "Avoids gratuitous restructuring of an already coherent passage."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "아래 공지를 자연스럽게 고쳐 줘. 본문만 줘. 원문: 이번 변경은 단순한 일정 조정이 아니라 이용 경험을 혁신적으로 개선하는 중요한 전환점입니다. 다음 주부터 자료실은 화요일에 한해 오후 8시까지 운영됩니다. 단, 공휴일에는 운영되지 않습니다. 이를 통해 이용 편의성의 획기적인 향상이 이루어질 것으로 기대됩니다. 핵심은 분명합니다. 더 나은 이용 경험을 위해 우리는 한 걸음 더 나아갑니다.",
+      "expected_output": "A direct notice retaining the exact temporal scope and holiday exception while removing unsupported impact and repetitive rhetoric.",
+      "files": [],
+      "assertions": [
+        "Retains next-week start, Tuesday-only extension, 8 pm closing, and holiday closure.",
+        "Does not invent an opening hour, measured benefit, cause, or broader weekly availability.",
+        "Removes empty contrasts, inflated benefits, and repeated declarations without producing awkward noun fragments."
+      ]
+    }
+  ]
+}
