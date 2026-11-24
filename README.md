@@ -17,6 +17,12 @@ Task-focused skills for designing changes, checking evidence, managing ongoing w
 | [pr-authoring](skills/pr-authoring/SKILL.md) | Write or review a pull request description against the actual change and requirements. |
 | [writing](skills/writing/SKILL.md) | Compose clear, accurate, natural prose from the first draft, or revise and review existing writing without losing meaning or voice. |
 
+## Installation
+
+```sh
+npx skills@latest add miinhho/skills
+```
+
 ## Use a skill
 
 1. Choose a skill from the table and read its `SKILL.md`.
