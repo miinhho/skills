@@ -1,6 +1,6 @@
 # Skills for coding agents
 
-Task-focused skills for designing changes, checking evidence, managing ongoing work, and writing issues or pull requests. Each skill provides its own instructions and supporting material.
+Task-focused skills for designing changes, checking evidence, managing ongoing work, and writing reader-facing prose, issues, or pull requests. Each skill provides its own instructions and supporting material.
 
 ## Available skills
 
@@ -15,6 +15,7 @@ Task-focused skills for designing changes, checking evidence, managing ongoing w
 | [context-memo](skills/context-memo/SKILL.md) | Maintain ongoing work in OMP across phases, requirement changes, interruptions, or fresh contexts. |
 | [issue-authoring](skills/issue-authoring/SKILL.md) | Prepare an actionable GitHub or Jira issue before publication. |
 | [pr-authoring](skills/pr-authoring/SKILL.md) | Write or review a pull request description against the actual change and requirements. |
+| [writing](skills/writing/SKILL.md) | Compose clear, accurate, natural prose from the first draft, or revise and review existing writing without losing meaning or voice. |
 
 ## Use a skill
 
@@ -27,6 +28,8 @@ For example, with this collection accessible to the agent:
 > Use `skills/code-designer/SKILL.md` to design resumable imports for the inventory project. Preserve the existing input format and ground the design in the current implementation.
 
 Check each skill's compatibility notes before use. Some skills require a specific runtime; context-memo uses OMP's notebook and context-replacement tools.
+
+For writing guidance throughout your work, add a reference to `writing/SKILL.md` in the persistent instructions your agent actually loads, using its installed path. Ask the agent to apply it while composing reader-facing prose, including issue and PR descriptions, alongside any document-specific skill. Automatic skill selection depends on the host; the description alone does not guarantee activation. No separate polishing call or external model is required.
 
 ## Contribute
 
