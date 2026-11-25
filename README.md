@@ -10,6 +10,10 @@ Task-focused skills for designing changes, checking evidence, managing ongoing w
 | [code-designer](skills/code-designer/SKILL.md) | Design responsibilities, interfaces, and acceptance evidence, then independently review the design. |
 | [code-audit](skills/code-audit/SKILL.md) | Diagnose existing code or a change against standards, requirements, and maintenance risks without editing it. |
 | [code-cleaner](skills/code-cleaner/SKILL.md) | Perform scoped, behavior-preserving cleanup with appropriate before/after verification. |
+| [react-cleaner](skills/react-cleaner/SKILL.md) | Simplify React components and hooks without changing their consumer contracts. |
+| [frontend-debugging](skills/frontend-debugging/SKILL.md) | Reproduce frontend failures, isolate their causes, and verify focused fixes. |
+| [frontend-accessibility](skills/frontend-accessibility/SKILL.md) | Implement or review semantic UI, keyboard behavior, and focus contracts. |
+| [frontend-bundling](skills/frontend-bundling/SKILL.md) | Diagnose frontend build pipelines and verify emitted artifacts in their intended consumers. |
 | [evidence-driven-poc](skills/evidence-driven-poc/SKILL.md) | Run a focused experiment to resolve a consequential assumption. |
 | [e2e-verify](skills/e2e-verify/SKILL.md) | Verify a workflow or assess whether end-to-end tests prove their claims. |
 | [context-memo](skills/context-memo/SKILL.md) | Maintain ongoing work in OMP across phases, requirement changes, interruptions, or fresh contexts. |

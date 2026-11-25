@@ -1,0 +1,38 @@
+{
+  "skill_name": "frontend-bundling",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I checked the production artifacts for an inventory app built with Vite 6 using our existing local static server. It worked at `/` on the dev server, but the production artifacts are served at `/inventory/`. The HTML opens in the browser, but its entry script points to `/assets/main-a.js`, which returns a 404. The output includes `assets/main-a.js` and `assets/detail-b.js`, and both files are served under `/inventory/assets/`. The config doesn't set `base`. The API URL comes from `import.meta.env.VITE_DATA_ORIGIN` at build time, and changing only the server process environment after building didn't change the URL. Tell me the smallest fix and what I should check locally. Don't edit code or run anything.",
+      "expected_output": "Diagnose a mismatch between the Vite 6 production output and the actual asset request paths. Keep the asset base URL separate from the API configuration and distinguish public values injected at build time from actual runtime configuration. Provide only the steps for checking the proposed fix locally.",
+      "files": [],
+      "assertions": [
+        "Compares the HTML entry asset's request URL with the URL where it is served and proposes a minimal change that directly addresses the observed mismatch, such as setting Vite's asset base URL to `/inventory/`.",
+        "Explains that changing only the server process environment does not update the build-time substitution of `VITE_DATA_ORIGIN` and does not treat the public API URL and asset base URL as interchangeable settings.",
+        "Calls for checking the URLs and successful loads of the document, entry script, and async chunk needed when the feature opens, all from the same production build, without claiming to have run the checks."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this proposed change to our work scheduling app. The before report says the development build had 210 kB of initial JS (uncompressed). The after report says the production build has 62 kB of entry JS (gzip) and a separate `export-panel` chunk. The entry file still statically imports a formatting function from the panel. The UI package the app consumes declares both Node ESM `import` and CJS `require` paths in `exports`, and its entry point loads the default stylesheet. The team wants to mark all files with `sideEffects: false`, add UMD, and share the percentage savings. Tell me what to accept and what criteria to verify. Don't edit files or run anything.",
+      "expected_output": "Do not calculate percentage savings from unlike size metrics. Propose what evidence to check for the panel's inclusion in the initial graph and for async requests, what conditions allow tree shaking without losing styles, and how to verify consumption through the declared ESM and CJS paths. Do not recommend adding UMD without a demonstrated need.",
+      "files": [],
+      "assertions": [
+        "Does not claim percentage savings from figures that differ in mode, scope, and compression. Sets criteria for measuring comparable production artifacts using the same initial path and unit.",
+        "Does not accept a separate chunk name as proof of deferred loading. Calls for checking what code the static reference leaves in the initial graph by inspecting the artifacts and observing requests during initial load and feature use.",
+        "Does not approve blanket `sideEffects: false` because stylesheet loading must be preserved. Calls for checking unused code removal and required styling behavior separately.",
+        "Calls for checking the actual ESM and CJS artifacts through the declared package paths rather than source files, without making an unrequested UMD format or publication a prerequisite for verification."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "On a booking form, switching time slot tabs on the same page clears only the input values. I can reproduce it by clicking a tab without changing any code, and it happens in both the dev server and the production artifacts. Clicking a tab doesn't trigger a document or chunk request, and each tab renders `<BookingForm key={slotId} />`. A coworker thinks HMR or chunk settings might be responsible. Explain what resets the state and where I should look in the code. Don't run anything.",
+      "expected_output": "Identify that bundling and HMR are not the primary concern. Narrow the cause to React remounting the component when its `key` changes and resetting local state. Review state ownership in light of the requirements for preserving state across tabs.",
+      "files": [],
+      "assertions": [
+        "Uses the fact that the issue reproduces in production without file changes as evidence and does not propose changing HMR or chunk options as a fix.",
+        "Explains how changing `slotId` changes the `key` and resets local state. If values must persist, suggests reviewing where to keep state, for example by preserving a separate draft for each tab."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "skill_name": "react-cleaner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review a proposed refactor of a working React 18 report filter. Do not edit any files. ReportFilters owns the draft that users edit. It could compute visibleCount from records and draft on each render, but currently uses an Effect to update separate state. A separate Effect passes draft to a map widget, keeps the widget's current state in sync, and registers cleanup. Compact mode only changes the layout, and the search text and keyboard focus must survive mode switches. The proposal is to split Compact and Full so each renders its own input and remove both Effects. Which parts would you clean up, and which would you keep?",
+      "expected_output": "Recommend computing the derived value directly during render. Keep external synchronization and cleanup. Explain that the same input instance and state must survive even if the layouts are split, and say what to check when switching modes.",
+      "files": [],
+      "assertions": [
+        "Distinguishes visibleCount from the editable draft and targets only the redundant visibleCount state and its synchronization Effect for removal.",
+        "Keeps synchronization and cleanup for the external map widget rather than removing every Effect.",
+        "Explains the risk of remounting or losing focus when moving the input between modes and recommends checking the value and focus after typing and switching modes.",
+        "Does not claim to have edited code or run verification."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Only review the design: could these two React lists share a component? TeamPicker is single-select. Arrow keys move the active item, and Enter confirms the team. AuditFeed opens item links, and it must still be possible to open an existing link in a new tab. Both render an icon and a title in the same style. TeamPicker's renderItem({ item, active }) passes the active state supplied by the library to the row, and disabled blocks selection only when the parent lacks permission. AuditFeed's renderItem({ item }) uses the item's URL. Someone proposes putting isLink, isPicker, and showIcon on GenericRow and replacing renderItem with children. Assess the proposal based on the evidence here.",
+      "expected_output": "Do not merge components with different interaction contracts into a flag-based common component. Share only stable noninteractive presentation, or leave them as they are.",
+      "files": [],
+      "assertions": [
+        "Uses the different user actions and keyboard and link contracts for selection and navigation as reasons not to create a shared interaction component.",
+        "Does not replace renderItem, which needs internal data, with plain children, or remove independent disabled state based on the number of flags.",
+        "If it proposes sharing anything, limits the scope to noninteractive icon and title presentation or styles, preserving the existing selection and link contracts."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "On a React settings screen, sometimes I click Save once and two requests go out. Find out why. I haven't checked whether this happens in development or production, and I've only seen duplicate requests in the network timeline, not click logs. I'm not asking for structural improvements.",
+      "expected_output": "Treat this as diagnosis, not behavior-preserving cleanup. Suggest an initial observation to identify whether duplication starts at the user event, during submission handling, or when the request is initiated.",
+      "files": [],
+      "assertions": [
+        "Does not start a react-cleaner task or recommend changing component structure just because the code uses React.",
+        "Does not conclude from two network requests alone that the cause is a click, an Effect, or Strict Mode.",
+        "Suggests a way to correlate events and submissions with each request start in the environment where the issue was observed."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review a proposed cleanup of a shipping-slot editor without changing files. The start/end dates must be validated together, and the form must display the reason for rejection. The note has only an independent length check. The list request's limit=30 and the 30 used to calculate the page count refer to the same number of items the API actually returns per page. The note length limit is also 30, but it has a different policy owner, changes at different times, and the list limit has changed on its own before. Would you combine all three values into LIMIT and move all validation to individual fields?",
+      "expected_output": "Keep only the two list limit usages aligned with their existing policy owner. Leave the note limit separate. Keep the combined date constraint at a boundary that can see both dates, and keep the independent note validation near its existing owner.",
+      "files": [],
+      "assertions": [
+        "Explains why the two uses of page size must change together without merging the numerically equal note limit.",
+        "Distinguishes the boundary for the combined date rule from the boundary for independent note validation, preserving how the form displays failures and its submission contract.",
+        "Proposes consumer scenarios that verify the recommendation, such as changing the limit or fixing a date error and resubmitting."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Only review how to simplify an audio clip editor. Two instances can appear on the same screen. The timeline and bottom buttons in each instance use the same draft playback range. Apply sends the latest draft range to the parent once. Cancel sends nothing to the parent and discards the draft range, so reopening must start from the last committed value. The timeline passes its position and selection state to the caller's renderSegment. Two intermediate panels only forward the draft range and callbacks. The team wants to move state into module-global scope and replace renderSegment with children. What boundary would simplify this, and what regressions should we check for?",
+      "expected_output": "Keep one owner of the draft range per instance and shorten forwarding paths by composing at the call site. An instance-scoped Provider is also an option if there is a real need. Keep the render callback that receives internal data. Verify that Apply sends the latest value once and that reopening after Cancel starts from the committed value.",
+      "files": [],
+      "assertions": [
+        "Rejects global state and proposes the smallest boundary that keeps the two instances' draft values and lifetimes isolated.",
+        "Distinguishes layers that only forward props from the render contract that supplies the timeline's internal state, and does not replace renderSegment with plain children.",
+        "Checks that the parent value stays unchanged before Apply, Apply sends the latest draft value to the parent exactly once, and edits in one instance do not affect the other.",
+        "Checks that Cancel does not change the parent value and that reopening shows the last committed value rather than the discarded draft."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Review a proposed cleanup of a server-rendered React screen. The result count can be computed from the current rows, but the contract hides it in the server HTML and on the first client render and shows it only after hydration completes. The search input is initially absent and mounts when the Open button is pressed. The current code moves focus once the input appears and does not steal it back after the user moves it to another element. The team proposes displaying the count on the first render and focusing the input immediately after setOpen(true) in the open event handler. Without editing or running code, explain what contracts to preserve and how to verify them.",
+      "expected_output": "Distinguish computing the value from first displaying it and preserve the existing hydration boundary. Distinguish the open event from moving focus after the new input has committed. Explain how to check initial output, when the count appears, focus, and subsequent re-renders.",
+      "files": [],
+      "assertions": [
+        "Does not expose the result count in the server HTML or on the first client render just because it can be recomputed from rows.",
+        "Explains that trying to focus immediately after setOpen can fail because the target does not yet exist, and preserves focus behavior after the target has been committed.",
+        "Distinguishes server output, the first client render, and output after hydration, and checks that focus reaches the input after opening and that subsequent re-renders preserve the user's focus.",
+        "Does not claim to have changed code or completed browser verification."
+      ]
+    }
+  ]
+}

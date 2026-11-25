@@ -1,0 +1,42 @@
+{
+  "skill_name": "frontend-accessibility",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review only the code below for accessibility on a screen for archiving materials. The component manages state with isOpen and setOpen. This confirmation dialog must block background interaction, and the supported browsers support <dialog>.showModal(). The code below contains all of the interaction logic. Our department checklist flagged 'button has no role,' and an automated audit of the screen after opening the dialog with a click reported zero detected violations. Tell me what you found, the smallest fix, and which regression checks you would run. Do not edit files or run a browser or assistive technology.\n\n<main>\n  <button type=\"button\" onClick={() => setOpen(true)}>Archive materials</button>\n  <a href=\"/library\">Materials list</a>\n</main>\n{isOpen && <div className=\"overlay\"><div role=\"dialog\">\n  <h2>Archive these materials?</h2>\n  <button type=\"button\" onClick={() => setOpen(false)}>Cancel</button>\n</div></div>}",
+      "expected_output": "Explains that the button's implicit role is not a defect. Diagnoses the missing dialog name, dismissal, background blocking, and focus lifecycle separately. Proposes a named native modal or a custom fix that meets the same contract, and states which checks were not run and what the automated audit covers.",
+      "files": [],
+      "assertions": [
+        "Dismisses the missing-role warning because the existing <button> has an implicit button role.",
+        "Notes that the heading is in the DOM but is not associated with the dialog as its name, and proposes linking the heading or providing an equivalent name.",
+        "If proposing a native <dialog>, distinguishes showModal() from using only show() or open. If proposing a custom modal, explains that aria-modal alone cannot block interaction and includes actual background blocking and focus management within the modal.",
+        "Proposes checking focus inside the dialog immediately after opening it with the keyboard, that neither Tab nor Shift+Tab reaches the background, that Escape and the close button each dismiss the dialog, and that focus returns to the entry point after dismissal.",
+        "Does not report zero automated audit findings or a code review as proof of passing direct keyboard or screen reader checks."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Show me a code example that improves the email form for workshop registration. The email is required, and even if it passes validation, the server may reject it because the address is already in use. The existing onSubmit sends a server request for valid input. Keep the browser's built-in validation and keep the input hint below visible. Associate the server error with the field without marking it invalid before the user enters anything or losing the general guidance. Here is the original code. Do not run it, but describe the order in which you would check it.\n\n<form onSubmit={send}>\n  <input name=\"email\" type=\"email\" required placeholder=\"Email\" />\n  <p id=\"email-hint\">Enter the email address where you'd like to receive your registration details.</p>\n  {serverError && <p className=\"error\">This email address is already in use.</p>}\n  <button type=\"submit\">Register</button>\n</form>",
+      "expected_output": "Associates a visible label and the hint with the field. Preserves native constraints and the submission path. When server validation actually fails, exposes actionable error information and error state on the field. Covers correction and resubmission while distinguishing evidence of on-screen display, browser behavior, and assistive technology announcements.",
+      "files": [],
+      "assertions": [
+        "Associates a visible label with the input and does not leave the placeholder as a substitute for a label.",
+        "Preserves required, type=email, and the existing form submission and server handling contract. Does not assume the submit handler runs when native validation fails or require server return values or error types not given in the prompt.",
+        "Sets aria-invalid for the app's server error when that error is present, and associates the visible error using aria-describedby or a valid aria-errormessage relationship. Keeps the existing hint accessible.",
+        "Proposes a way to announce the error after the response, such as moving focus or using a live region, and includes clearing stale error state and references after correction.",
+        "Separately checks initial state, native validation failure, server rejection of a correctly formatted value, correction, and resubmission, without claiming any screen reader announcement was observed."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The settings menu looks like tabs, but each item is a link that navigates to a separate screen, such as /settings/profile or /settings/notifications. Someone reported that after navigating to the notifications screen and pressing the browser's Back button once, they stayed on the same URL. I want to know what router code or history entries to inspect first. Do not run anything or edit code.",
+      "expected_output": "Focuses on link navigation and how the router records history rather than turning the task into an accessibility implementation or review. Does not introduce ARIA tabs or arrow-key behavior just because the links look like tabs, and does not infer a definite cause from the reported symptom alone.",
+      "files": [],
+      "assertions": [
+        "Does not recommend changing links to role=tab or adding tab panels and arrow-key behavior based on their appearance.",
+        "Identifies specific points in the link click and router transition to inspect for the order in which history entries are created for each URL.",
+        "Does not claim a specific cause, an accessibility defect, or a passing verification result without running anything."
+      ]
+    }
+  ]
+}

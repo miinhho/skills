@@ -1,0 +1,40 @@
+{
+  "skill_name": "frontend-debugging",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "In a craft studio's booking calendar, pressing the arrow keys twice in quick succession selects the right date, but the available times revert to those for the previous date. The existing logs show that the first input selected Monday and started request A, then the second input selected Tuesday and started request B. Both key events reached the same calendar handler once each. With Tuesday selected, B finished first and displayed 14:00. A finished later and changed the displayed time to Monday's 10:00. Each response contained the right date and data for its request. The calendar reportedly works when the same two dates are selected slowly with a pointer. In the code, every request's completion callback updates the list of times or the error state without checking whether the request is still current. Based only on this material, identify the cause and propose a minimal fix and a local regression procedure. Do not run anything or edit files.",
+      "expected_output": "Explain that the supplied logs show correct input handling, date selection, and responses for both requests, and that the contract was broken when the older request's completion updated the view state. Keep the interaction path, input, and data fixed and change only the response completion order to compare whether the final result reverts to the previous date. A case with both a different input method and a different speed is not a controlled comparison. Allow only the request for the current selection to change the list and error state, and check the original interaction and normal completion of the current request for regressions.",
+      "files": [],
+      "assertions": [
+        "Use the logs to distinguish the correctly handled keypresses and date selections from the responses, which were also correct for their respective requests. Identify application of the stale response to the view as the boundary where the failure occurred.",
+        "Propose a reproduction and control that keep the key input, initial state, and response data fixed, start A then B in both cases, compare completion in B→A versus A→B order, and observe the selected date and final list of times.",
+        "Propose a localized change that prevents either success or failure of an older request from overwriting the list or error state for the current selection. Do not treat debouncing or a fixed delay alone as sufficient.",
+        "Propose regression checks that the current request's result is applied normally, the view does not revert when the older request finishes later, and existing keyboard navigation still works. Do not claim to have run anything new or edited files."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "After opening and closing a library seating layout preview several times, resizing the open preview becomes increasingly slow. The following logs were recorded in the same browser and build and with the same seating data: after five open-close cycles, one preview was reopened and a single resize signal was sent. The callback ran six times, five of them for previews that had already closed. Just after the first opening, the same signal produced one callback. When the preview opens, subscribe(onResize) on a shared resize bus returns a per-instance unsubscribe function, but closing the preview currently removes only the DOM and does not call that function. Other panels use the shared bus, and the layout image cache is intentionally reused on reopening. Write a memo describing the confirmed problem, a small fix, and a verification plan. Use only this material without accessing the device or repository.",
+      "expected_output": "Tie the callback logs and missing cleanup to the finding that the closed previews' subscriptions remain active and add unnecessary work on the same signal. Unsubscribe only the instance being closed and preserve the shared bus and image cache. Propose comparing callback counts and visible responsiveness over the same resize interval after repeated open-close cycles under identical conditions. Do not infer the magnitude of the overall slowdown or a separate heap leak from the callback logs alone.",
+      "files": [],
+      "assertions": [
+        "Connect the six callbacks from a single signal, five of them for closed instances, to the missing unsubscribe call. Do not claim unmeasured performance figures or a separate heap leak.",
+        "Propose unsubscribing only the relevant instance at the preview's close boundary, while keeping the shared bus and intentional cache.",
+        "Compare before and after using the same data, cycle count, and input. Verify that closed instances produce no callbacks and that an active instance responds exactly once after reopening. To claim a performance effect, propose observing an interaction metric separately under the same conditions.",
+        "Distinguish the existing logs from proposed verification and do not claim to have accessed the device or repository."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "An event information site opens on the development server but shows a blank screen when the production build is served locally. The deployment contract is that the build is served only under /festival/. The generated index.html in dist contains <script type='module' src='/assets/index-7ab.js'>, and dist/assets/index-7ab.js exists. On the local host, /festival/ returns 200, /assets/index-7ab.js returns 404, and /festival/assets/index-7ab.js returns 200. Based only on this material, identify the type of work, where to make the fix, and how to verify it. Do not edit files or run anything.",
+      "expected_output": "Prioritize the mismatch between the build's public path and the path it is actually served from over the surface symptoms of a blank screen or a difference between development and production. Classify this as a bundling and build artifact loading issue rather than defaulting to general runtime debugging. Propose aligning the production build's public base path with the deployment contract, then checking the generated asset URLs and verifying that the rebuilt site loads at the actual subpath.",
+      "files": [],
+      "assertions": [
+        "Connect the generated HTML's /assets/ reference and the /festival/ serving path to the observed 404 and 200 responses. Check the build artifact's public path before tracing general UI runtime behavior.",
+        "Do not assume an unverified bundler or CDN issue. Propose checking asset references in the new build, requests at the local subpath, and the initial rendered view.",
+        "Do not speculate that state or event handlers are the cause and try to fix them. Do not claim to have run a new build or checked it in a browser."
+      ]
+    }
+  ]
+}
